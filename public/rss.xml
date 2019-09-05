@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[chanceZhang]]></title><description><![CDATA[chanceZhang's personal website]]></description><link>http://www.zyw.name</link><generator>RSS for Node</generator><lastBuildDate>Thu, 05 Sep 2019 11:44:09 GMT</lastBuildDate><item><title><![CDATA[项目流程文档]]></title><description><![CDATA[Web端前端部署指南打包项目文件前端项目文件可能有两种形式，一种是人工搭建目录，即这种方式不需要但是需要使用相对路径在手动引入资源，另一种方式是打包前端资源即这种情况需要找到对应webpack…]]></description><link>http://www.zyw.name/2019/09-05/ppd</link><guid isPermaLink="false">http://www.zyw.name/2019/09-05/ppd</guid><pubDate>Thu, 05 Sep 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;web端前端部署指南&quot;&gt;&lt;a href=&quot;#web%E7%AB%AF%E5%89%8D%E7%AB%AF%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97&quot; aria-label=&quot;web端前端部署指南 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Web端前端部署指南&lt;/h2&gt;
+&lt;h3 id=&quot;打包项目文件&quot;&gt;&lt;a href=&quot;#%E6%89%93%E5%8C%85%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6&quot; aria-label=&quot;打包项目文件 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;打包项目文件&lt;/h3&gt;
+&lt;p&gt;前端项目文件可能有两种形式，一种是人工搭建目录，即&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;-foldername
+  -index.html
+  -foo.html
+  -bar.html
+  -css
+    -index.css
+    -foo.css
+    -bar.css
+  -js
+    -index.js
+    -foo.js
+    -bar.js&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这种方式不需要&lt;code class=&quot;language-text&quot;&gt;build&lt;/code&gt;但是需要使用相对路径在&lt;code class=&quot;language-text&quot;&gt;index.html&lt;/code&gt;手动引入资源，另一种方式是&lt;code class=&quot;language-text&quot;&gt;webpack&lt;/code&gt;打包前端资源即&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;xx.vue
+&lt;span class=&quot;token comment&quot;&gt;## 也有可能是&lt;/span&gt;
+xxx.jsx
+xxx.tsx
+&lt;span class=&quot;token comment&quot;&gt;## ...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这种情况需要找到对应webpack配置文件如&lt;code class=&quot;language-text&quot;&gt;vue.config.js // vuecli3&lt;/code&gt;等修改输出目录为&lt;code class=&quot;language-text&quot;&gt;/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;注意不需要外部的文件夹，即不需要&lt;code class=&quot;language-text&quot;&gt;foldername&lt;/code&gt;，只需要项目文件夹内的文件&lt;/p&gt;
+&lt;h3 id=&quot;安装nginx&quot;&gt;&lt;a href=&quot;#%E5%AE%89%E8%A3%85nginx&quot; aria-label=&quot;安装nginx permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;安装nginx&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;nginx&lt;/code&gt;是前端部署的核心，目前本地服务器用的都是&lt;code class=&quot;language-text&quot;&gt;centOS&lt;/code&gt;，这里列出&lt;code class=&quot;language-text&quot;&gt;centOS&lt;/code&gt;安装&lt;code class=&quot;language-text&quot;&gt;nginx&lt;/code&gt;的两种方式，其中一种报错无法启动且错误无法追踪时，可以更换安装方式&lt;/p&gt;
+&lt;h4 id=&quot;通过yum安装&quot;&gt;&lt;a href=&quot;#%E9%80%9A%E8%BF%87yum%E5%AE%89%E8%A3%85&quot; aria-label=&quot;通过yum安装 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;通过&lt;code class=&quot;language-text&quot;&gt;yum&lt;/code&gt;安装&lt;/h4&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# 拉取 nginx包&lt;/span&gt;
+➜  yum -y &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; nginx
+
+&lt;span class=&quot;token comment&quot;&gt;## ...网速正常情况下你可能会看到如下结果&lt;/span&gt;
+
+Transaction summary
+
+&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt;
+
+Install 1 Package &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+Total download: 410 K
+
+Installed size: 1.1 M
+
+Download the package:
+
+Nginx-1.0.15-12.el6.i686.rpm &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; 410 kB 00:00
+
+Run rpm_check_debug
+
+Perform transaction testing
+
+Transaction Test Successful
+
+Executive Services
+
+Warning: RPMDB altered outside of yum.
+
+Installation &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; progress: nginx-1.0.15-12.el6.i686 1/1
+
+Verifying: nginx-1.0.15-12.el6.i686 1/1
+
+
+
+Installed:
+
+Nginx.i686 0:1.0.15-12.el6
+
+
+Complete&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;安装完之后，&lt;code class=&quot;language-text&quot;&gt;nginx&lt;/code&gt;会默认寻找&lt;code class=&quot;language-text&quot;&gt;usr/share/nginx/html&lt;/code&gt;目录下的&lt;code class=&quot;language-text&quot;&gt;index.html&lt;/code&gt;作为启动页面&lt;/p&gt;
+&lt;p&gt;你可以通过以下指令启动重启或者关闭服务&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;➜  &lt;span class=&quot;token function&quot;&gt;service&lt;/span&gt; nginx start &lt;span class=&quot;token comment&quot;&gt;## 启动nginx服务&lt;/span&gt;
+➜  &lt;span class=&quot;token function&quot;&gt;service&lt;/span&gt; nginx stop &lt;span class=&quot;token comment&quot;&gt;## 停止nginx服务&lt;/span&gt;
+➜  &lt;span class=&quot;token function&quot;&gt;service&lt;/span&gt; nginx restart &lt;span class=&quot;token comment&quot;&gt;## 重启nginx服务&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;命令行启动&lt;code class=&quot;language-text&quot;&gt;nginx&lt;/code&gt;如果出现以下页面，则&lt;code class=&quot;language-text&quot;&gt;nginx&lt;/code&gt;配置成功&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 800px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 33.375%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAIAAACHqfpvAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABV0lEQVQY03WLy07CUBCG+ypiXLkw0YUJ6s5oWPgEvoLowkRjXPsoXlDiwguU9vSCAUprvSw0gUDbNBISoFLacw62pVAPhBgXOvnmz2TmG2p2dTe2kvxhJr4zv76/mDhcShxtbJ8sbx0vbB7Mre39diZaMhZPUhm2RINyFkhZkqx0lysyvAxEBeTVgvTKP6isqNCcnJ06EnGITzYZTqWuhXegmoyi5wiyTpc1RjEI/JMJHg2gGHRZp+XxiZnk2JEN4dn0B0PqlKmkuOoFqKb4GknCGVs5B5XbYv2+pN8U9BRXuxK1dF5Pi9p4ELVLoZ4WapbtUsMwQI5F6EPbtduw13G6LfezPcAYO93Qgx6yv5A99PEo9KJREI0GURSFYej7HgUhgghDhKYDRH3smdaH0lDejKpYeGm2LLLsOa4DkTsBYUya/FPRX+UNfTvo9vqw0ex4fhD9U98CD0hHffWeMgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;yum安装nginx&quot;
+        title=&quot;&quot;
+        src=&quot;/static/575b017740f50fe6849dcd9b8b4e572d/8ff1e/yum-nginx.png&quot;
+        srcset=&quot;/static/575b017740f50fe6849dcd9b8b4e572d/135ae/yum-nginx.png 300w,
+/static/575b017740f50fe6849dcd9b8b4e572d/34e8a/yum-nginx.png 600w,
+/static/575b017740f50fe6849dcd9b8b4e572d/8ff1e/yum-nginx.png 800w&quot;
+        sizes=&quot;(max-width: 800px) 100vw, 800px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;yum安装nginx&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;如果报错，百分之七十是因为启动&lt;code class=&quot;language-text&quot;&gt;nginx&lt;/code&gt;的端口默认是80，而80端口已经被占用，所以会报&lt;code class=&quot;language-text&quot;&gt;nginx error code: config error 的错误&lt;/code&gt;，进入&lt;code class=&quot;language-text&quot;&gt;etc/nginx&lt;/code&gt;目录，使用&lt;code class=&quot;language-text&quot;&gt;vi&lt;/code&gt;打开&lt;code class=&quot;language-text&quot;&gt;nginx.conf&lt;/code&gt;文件，修改端口号，若仍不能启动，则使用源码包重装&lt;code class=&quot;language-text&quot;&gt;nginx&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 654px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 145.41284403669724%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAdCAIAAAAl5NuSAAAACXBIWXMAAAsSAAALEgHS3X78AAACAElEQVQ4y5WU3XabMBCELQn0gyT+EfTCzU3fwDd5/yfrJ+EmPm0aYI6PIbF2d3ZnVrf7+32dt59v92mauq5r27Y7Qt/31trH43GLMTbeE9M0jRDidgnbti3LQvC6rikt1CcxGQ8T5QPjOHrvrXPD0EMpxMifztlTlWG/pzHGWMvHSinP0vaeYrF6QgEeZ4M5C0ngm4ZnXdda12eDnXOvPEXB2WCtTVrXvu/oeRiHeZkZmzHaFhwEU3YooPMQQkSzbV1SIt2ckZVDiGEYeTa+ITVkP4Op+ZGLn9ctoXZKCRVRfs7vC3bgn/bl5LNJH5DWQ9UXYDVGyMunGb4xCn1O4wgFzQD+yn3Y8zSNueeQCWijrwXTHsF0yGAYBj45GyyEZMmM1hdc+QpU+vVjSyEMRr8tc4rxQjCOTggCaTYzBGfsBZNJpbg+8mJai067t2ie0Wfzfp+IbvENBqsLnstVUNXVMQkqMGxSMHZbCuaaSp4ZuFCVomZZ5rrad7rgWAIpVduyEdG5BoeRS0pBBs+exPZP0v/k4id2iIOYmhyAwTMCXJ7v1oLd7V9cMkybC7Rscss3i6lLNVNwLBszhh4KcVoWECw+3tTz7SvalcLWFIRcyHRZT7PLTts+K499NYn5/sdhVUWTLAa089UdQrGJgcupxcokEUwqkTcl8z1zE/4GAsAh0qAE/E0AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;端口号修改位置&quot;
+        title=&quot;&quot;
+        src=&quot;/static/a124d963ccf0b153c80fc0151f6471c3/bbf8d/nginx-config-port.png&quot;
+        srcset=&quot;/static/a124d963ccf0b153c80fc0151f6471c3/135ae/nginx-config-port.png 300w,
+/static/a124d963ccf0b153c80fc0151f6471c3/34e8a/nginx-config-port.png 600w,
+/static/a124d963ccf0b153c80fc0151f6471c3/bbf8d/nginx-config-port.png 654w&quot;
+        sizes=&quot;(max-width: 654px) 100vw, 654px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;端口号修改位置&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;注意分号，行对齐格式不能错误，否则会报和之前一样的配置文件错误的错误&lt;/p&gt;
+&lt;h4 id=&quot;通过源码包安装nginx&quot;&gt;&lt;a href=&quot;#%E9%80%9A%E8%BF%87%E6%BA%90%E7%A0%81%E5%8C%85%E5%AE%89%E8%A3%85nginx&quot; aria-label=&quot;通过源码包安装nginx permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;通过源码包安装nginx&lt;/h4&gt;
+&lt;p&gt;使用下述指令安装缺少的依赖&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;➜  yum -y &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; gcc gcc-c++ &lt;span class=&quot;token function&quot;&gt;make&lt;/span&gt; libtool zlib zlib-devel openssl openssl-devel pcre pcre-devel&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;从 &lt;a href=&quot;http://nginx.org/en/download.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;下载地址&lt;/a&gt;下载稳定版 &lt;code class=&quot;language-text&quot;&gt;nginx-1.10.1.tar.gz&lt;/code&gt; ，下载的压缩文件 放在任意地方都可以，但是建议放在 &lt;code class=&quot;language-text&quot;&gt;/usr/local/src&lt;/code&gt; 或者 &lt;code class=&quot;language-text&quot;&gt;/root/&lt;/code&gt; 下，&lt;code class=&quot;language-text&quot;&gt;/usr/local/src&lt;/code&gt; 就是系统专门给用户分配的放 源码的目录，&lt;code class=&quot;language-text&quot;&gt;/root/&lt;/code&gt; 是我们默认操作的目录，所以也可以放在这里。&lt;/p&gt;
+&lt;p&gt;可以在服务器通过命令下载：&lt;code class=&quot;language-text&quot;&gt;➜  wget http://nginx.org/download/nginx-1.10.1.tar.gz&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;我的下载目录是&lt;code class=&quot;language-text&quot;&gt;~ ➜&lt;/code&gt;下，解压&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;➜  tar -zxvf nginx-1.10.1.tar.gz&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;解压缩后你的命令行大概是这样的&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;➜  ~ anaconda-ks.cfg  install.log  install.log.syslog  nginx-1.10.1  nginx-1.10.1.tar.gz &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;然后顺序执行下列指令&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;➜  ~ &lt;span class=&quot;token function&quot;&gt;cd&lt;/span&gt; nginx-1.10.1 
+➜  nginx-1.10.1 ./configure --prefix&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-pcre
+➜  nginx-1.10.1 &lt;span class=&quot;token function&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;使用 源码包 安装 nginx ，启动需要使用绝对路径来执行，如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;➜  ~ &lt;span class=&quot;token function&quot;&gt;cd&lt;/span&gt; /usr/local/nginx/sbin/
+➜  ~ nginx           &lt;span class=&quot;token comment&quot;&gt;#启动 nginx 服务&lt;/span&gt;
+➜  ~ /usr/local/nginx/sbin/
+➜  ~ nginx -s stop   &lt;span class=&quot;token comment&quot;&gt;#停止 nginx 服务&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;浏览器输入&lt;code class=&quot;language-text&quot;&gt;ip&lt;/code&gt;访问出现如下界面则成功&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 650px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 40.15384615384615%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAIAAAB2/0i6AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA4klEQVQY06WQ3Y6CMBCFef8n42a9IVGMpRRE7B8shbZKUluHuoaNulf7ZZo06TlnZpqEEM7tKU1TVBT7SNM0hJAsy/I819qAwHsfPpHAEZyDFGOMDgeEUNu2FSFfmw0EabOYb2+sZmuNEEJKyQDO4U4ZU+No7WUaJ6UGeBpULwTrfuidc6uZcw6KM6Vg6/qORfM8W6jLwlVrb4yDnv7Jaq7qqq5h2BKX5fFYowIVGO92YruVlPZKTYx5KV93X8yQDJ2/hwEGEpHrPMdVl/rjs55mCIQdHj/hIr8E65jvKUn4B3eGN8rFYH+ZgQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;源码包安装nginx&quot;
+        title=&quot;&quot;
+        src=&quot;/static/28fb091891c963008ced90461c10f6f8/dbb61/nginx.png&quot;
+        srcset=&quot;/static/28fb091891c963008ced90461c10f6f8/135ae/nginx.png 300w,
+/static/28fb091891c963008ced90461c10f6f8/34e8a/nginx.png 600w,
+/static/28fb091891c963008ced90461c10f6f8/dbb61/nginx.png 650w&quot;
+        sizes=&quot;(max-width: 650px) 100vw, 650px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;源码包安装nginx&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;h4 id=&quot;两种安装方式区别&quot;&gt;&lt;a href=&quot;#%E4%B8%A4%E7%A7%8D%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F%E5%8C%BA%E5%88%AB&quot; aria-label=&quot;两种安装方式区别 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;两种安装方式区别&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;源码包安装是在服务器上编译的，部分情况下性能更好。且所有的资源在一个目录下方便管理&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;yum&lt;/code&gt;安装简单且不易出错，启动关闭操作都很方便&lt;/li&gt;
+&lt;li&gt;卸载方式不同&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用&lt;code class=&quot;language-text&quot;&gt;yum&lt;/code&gt;安装只能通过命令来卸载，可以通过命令 &lt;code class=&quot;language-text&quot;&gt;rpm -e nginx&lt;/code&gt; 来卸载，这个命令一般不会报错，因为 &lt;code class=&quot;language-text&quot;&gt;nginx&lt;/code&gt; 不与其他的包有依赖关系，如果提示关于依赖包的问题 ，可以尝试 &lt;code class=&quot;language-text&quot;&gt;rpm -e --nodeps nginx&lt;/code&gt; 来卸载，这个命令相当于强制卸载，不考虑依赖问题。&lt;/p&gt;
+&lt;p&gt;源码包 安装他的所有文件（包括配置文件，库文件，资源文件等）都在同一个目录下，我们想卸载的时候，直接将这个文件删除就可以，不会有任何垃圾文件存在。
+通过源码包编译安装的软件，通常都放在 &lt;code class=&quot;language-text&quot;&gt;/usr/local/&lt;/code&gt;路径下。&lt;/p&gt;
+&lt;h3 id=&quot;部署前端文件&quot;&gt;&lt;a href=&quot;#%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E6%96%87%E4%BB%B6&quot; aria-label=&quot;部署前端文件 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;部署前端文件&lt;/h3&gt;
+&lt;p&gt;上传已经准备好的项目包压缩文件，一般是&lt;code class=&quot;language-text&quot;&gt;dist.tar.gz&lt;/code&gt;格式，其他格式也可以，将目录内的资源文件，即&lt;code class=&quot;language-text&quot;&gt;js&lt;/code&gt;文件夹，&lt;code class=&quot;language-text&quot;&gt;index.html&lt;/code&gt;等放在指定目录下，&lt;/p&gt;
+&lt;p&gt;若使用&lt;code class=&quot;language-text&quot;&gt;yum&lt;/code&gt;安装，则将解压的前端资源放在&lt;code class=&quot;language-text&quot;&gt;usr/share/nginx/html/&lt;/code&gt;目录下&lt;/p&gt;
+&lt;p&gt;若使用源码包安装，则将前端资源放在&lt;code class=&quot;language-text&quot;&gt;usr/local/nginx/html&lt;/code&gt;目录下&lt;/p&gt;
+&lt;p&gt;随后重启&lt;code class=&quot;language-text&quot;&gt;nginx&lt;/code&gt;重启指令看第二步&lt;/p&gt;
+&lt;h3 id=&quot;上传和解压可能用到的linux指令&quot;&gt;&lt;a href=&quot;#%E4%B8%8A%E4%BC%A0%E5%92%8C%E8%A7%A3%E5%8E%8B%E5%8F%AF%E8%83%BD%E7%94%A8%E5%88%B0%E7%9A%84linux%E6%8C%87%E4%BB%A4&quot; aria-label=&quot;上传和解压可能用到的linux指令 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;上传和解压可能用到的&lt;code class=&quot;language-text&quot;&gt;linux&lt;/code&gt;指令&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;➜ &lt;span class=&quot;token function&quot;&gt;tar&lt;/span&gt; -cvf foldername.tar.gz foldername &lt;span class=&quot;token comment&quot;&gt;## 压缩前端资源文件&lt;/span&gt;
+➜ &lt;span class=&quot;token function&quot;&gt;tar&lt;/span&gt; -xvf foldername.tar.gz &lt;span class=&quot;token comment&quot;&gt;## 解压前端资源文件&lt;/span&gt;
+➜ &lt;span class=&quot;token function&quot;&gt;mv&lt;/span&gt; * &lt;span class=&quot;token punctuation&quot;&gt;..&lt;/span&gt;/ &lt;span class=&quot;token comment&quot;&gt;## 将所有资源移动到指定路径&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[搭建私有npm镜像]]></title><description><![CDATA[
+当公司到达一定程度，为了提高前端的开发效率，公司内部会创造一系列的框架或者工具库。这些包肯定是不可以暴露到外网之外的，所以你可以搭建一个私有的 npm。如果你们公司较为富有，其实直接用 npm 的企业版也是很不错的。
+
+]]></description><link>http://www.zyw.name/2019/06-01/deploy-your-own-npm-registry</link><guid isPermaLink="false">http://www.zyw.name/2019/06-01/deploy-your-own-npm-registry</guid><pubDate>Sat, 01 Jun 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;当公司到达一定程度，为了提高前端的开发效率，公司内部会创造一系列的框架或者工具库。这些包肯定是不可以暴露到外网之外的，所以你可以搭建一个私有的 npm。如果你们公司较为富有，其实直接用 npm 的企业版也是很不错的。&lt;/p&gt;
+&lt;!-- end --&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#%E5%89%8D%E8%A8%80&quot; aria-label=&quot;前言 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;前言&lt;/h2&gt;
+&lt;p&gt;公司现在前端技术栈包括 React 和 Vue 等。每个项目都有一些共同的部分，例如：JS 和 Native 通信封装，Universal Link，共有的一些工具方法（文件上传，时间价格格式化等）等。想要提高开发效率，第一步就是提取公共部分，减少重复劳动。这些公共部分不能存储在外网。因此需要内网搭建私有 npm 镜像。&lt;/p&gt;
+&lt;h2 id=&quot;verdaccio&quot;&gt;&lt;a href=&quot;#verdaccio&quot; aria-label=&quot;verdaccio permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;verdaccio&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/verdaccio/verdaccio&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;verdaccio&lt;/a&gt; 是我去年很早就开始关注的一个项目了。这也是这篇文章的主角。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;注意：下面内容牵扯到一些 docker 基础内容，这里不做教学，如果你不了解 docker，可以去看一下阮一峰大神的 &lt;a href=&quot;http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;docker 入门基础&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&quot;拉取镜像&quot;&gt;&lt;a href=&quot;#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F&quot; aria-label=&quot;拉取镜像 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;拉取镜像&lt;/h3&gt;
+&lt;p&gt;verdaccio 是支持 docker 的。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# 拉取 verdaccio 镜像&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; docker pull verdaccio/verdaccio
+
+&lt;span class=&quot;token comment&quot;&gt;# 查看 本地所有镜像&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; docker images
+
+&lt;span class=&quot;token comment&quot;&gt;## 你可能会看到如下结果&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# verdaccio/verdaccio   latest              cab129e3f6f6        4 weeks ago         345MB&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;因为镜像默认是从 dockerhub 拉取的，所以你可能会卡在这个地方。&lt;/p&gt;
+&lt;p&gt;如果你一直拉取不下来，你可以设置代理。我是用的是 &lt;a href=&quot;http://www.daocloud.io/mirror#accelerator-doc&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;daocloud.io&lt;/a&gt;，他提供免费的镜像加速服务。你只需要注册个账号，然后访问 &lt;a href=&quot;http://www.daocloud.io/mirror#accelerator-doc&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;http://www.daocloud.io/mirror#accelerator-doc&lt;/a&gt;，根据页面上的文档设置就行了。&lt;/p&gt;
+&lt;h3 id=&quot;启动容器&quot;&gt;&lt;a href=&quot;#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8&quot; aria-label=&quot;启动容器 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;启动容器&lt;/h3&gt;
+&lt;p&gt;在 docker 的概念中。镜像你可以理解为模板，容器可以理解为由镜像产生的实例。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# 创建一个 verdaccio 镜像的容器&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; docker run -it --rm --name verdaccio -p 4873:4873 verdaccio/verdaccio
+
+&lt;span class=&quot;token comment&quot;&gt;## 你可以看到如下类似的输出&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# &gt; docker run -it --rm --name verdaccio -p 4873:4873 verdaccio/verdaccio&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# warn --- config file  - /verdaccio/conf/config.yaml&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# warn --- http address - http://0.0.0.0:4873/ - verdaccio/2.7.4&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 34.43557582668187%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsSAAALEgHS3X78AAABNklEQVQoz6WOyU7DMBCGwyYQnCLoQhFq1TgLENLabmy3oUkoYk0lXoE7IJ4PlbdiuRQz2E4E6hEx0qffHo8/27JURSInIU9vuyG+Qce0MByRAoVluqEioibNWY8p4sKJBkW3ZOr04ovuYbSufZZP2TObXEEgckDxCbhsDGiYAeIpIJGV8AqWgkuG4NIR+IMEgjiBAzXvEvHRbDuu9q0RTGZxngE+LeYkv5RemkrvPJfeWSa9iSLPJEoy6QgFSyXCQiqp9OhIKulnoD+BxetOaz/UwlU/4rMgHuvm3KejL/XaL7hKWq3NfmhAWGPkgPr8rb7XLoWdkLx4NNFN6fQ5qKFF+hU/Pb6w1kKnx95r1Q9X7Frz2q7vPtn15r3KB5V/Qd95tButu43NrW2r0UFWVUuK5X9g6huNJ434ubIiPgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;bash-1&quot;
+        title=&quot;&quot;
+        src=&quot;/static/e495c275e237bf5e5064c92469abf531/6ff5e/bash-1.png&quot;
+        srcset=&quot;/static/e495c275e237bf5e5064c92469abf531/135ae/bash-1.png 300w,
+/static/e495c275e237bf5e5064c92469abf531/34e8a/bash-1.png 600w,
+/static/e495c275e237bf5e5064c92469abf531/6ff5e/bash-1.png 1200w,
+/static/e495c275e237bf5e5064c92469abf531/7c08e/bash-1.png 1754w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;bash-1&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;访问 &lt;code class=&quot;language-text&quot;&gt;http://0.0.0.0:4873/#/&lt;/code&gt; 你会看到如下页面：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 46.104491292392304%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABSUlEQVQoz32Qv07CUBjF+0iKm8HB6GCi0ck4ufga3RgaXgC2lqG4EMIzsKhQ28QQJTEpMZhgTP+ARHorUnr8bmmBgulJfvm+tqfnnlyhl9/Bp3QD51bE+/Up+pfn6F9xLvB2doTewR56+RzN3GrydzFmfhcfh/sYnRxH3wWvfQf/+Qn+6wuY0QbTOdpiGjQfW2DaQwqvfZ+CaS380D98F5ChgPglZsR0bc+SEAYBwvk8hvYghp59xvA9HmP8NQKbTOB7HmZTig7DlW+DrYYhmbkmFDAYDGDbNizLguu6GA6HcBwHHgUn3sS/bLgZOKdmXIZhoFAooFgsRkiSFCGKIprN5tL7b2ByEicJ7Ha7KJfLqFQqUBQlQpZllEol6LqeClzB73DjhCTQNE1Uq9WIer2ORqOBWq0GVVXR6XRS15PZcL1llrbbLfgDssmItOFa02EAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;verdaccio-website&quot;
+        title=&quot;&quot;
+        src=&quot;/static/1a682b8c4ab8b5363007ef21faaeacc9/6ff5e/verdaccio-website.png&quot;
+        srcset=&quot;/static/1a682b8c4ab8b5363007ef21faaeacc9/135ae/verdaccio-website.png 300w,
+/static/1a682b8c4ab8b5363007ef21faaeacc9/34e8a/verdaccio-website.png 600w,
+/static/1a682b8c4ab8b5363007ef21faaeacc9/6ff5e/verdaccio-website.png 1200w,
+/static/1a682b8c4ab8b5363007ef21faaeacc9/79a4a/verdaccio-website.png 1800w,
+/static/1a682b8c4ab8b5363007ef21faaeacc9/d5283/verdaccio-website.png 2182w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;verdaccio-website&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;然后你就可以按照如上方式进行包的提交了。&lt;/p&gt;
+&lt;p&gt;但是到这里，这篇文章可没有结束，才是开始。&lt;/p&gt;
+&lt;h3 id=&quot;后台运行&quot;&gt;&lt;a href=&quot;#%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C&quot; aria-label=&quot;后台运行 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;后台运行&lt;/h3&gt;
+&lt;p&gt;运行上一节的指令后，当你按 &lt;code class=&quot;language-text&quot;&gt;ctrl/cmd + c&lt;/code&gt; 之后，网页无法访问了。这里我们需要对上面的指令进行修改&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# 后台运行容器&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; docker run -it -d --name verdaccio -p 4873:4873 verdaccio/verdaccio
+
+&lt;span class=&quot;token comment&quot;&gt;# 查看正在运行容器&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; docker &lt;span class=&quot;token function&quot;&gt;ps&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;## 你可以看到如下结果&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                    NAMES&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# c7bd43009fbe        verdaccio/verdaccio   &quot;/usr/local/bin/dumb…&quot;   4 seconds ago       Up 3 seconds        0.0.0.0:4873-&gt;4873/tcp   verdaccio&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 34.43557582668187%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsSAAALEgHS3X78AAABd0lEQVQoz6WPSU/CUBSF6xRjNCBhKBgXQEspbelES1vaUqAgQiEaTYju3KPx9xn8Vw4bfO95W3DB2pt8ufe84dwcioKS7a4uWf5NRVSnVUmLGKAqKFFFUCNGjGc1gYVzTjEjVm1vUNpRVTYiRjZnMF9VGs3j2I/idfvNGkyI4PQJZwUJdTckPOia3SP1zoDwoFmYmZZLarpDWIBrdQhvuIQ3PcJq1nepzNZivyNONVfju0diTe/X+iBC1vgWSb1rpIcz5M0XSA0jJPcnSAzGqOmPEKc7qOn0kOYPkWh1f6AToe1/pPNFKTY8lO1gNZw/kFZvvFa8EIfzBdagw3asuAMMn7Hs9LFgeljzR1gCDQZY647iOyTaAWmY3meGvtgYlnnlXdIhpuHG25ModaCm2RDFTiImMf/0tteNDhi5sRmcWV/Z0mVieJChS5NUgX5N5QrL83zxOZ2jE+J5h8Ku3r5bAi+ZQunp5PQsS9ENkdrWHrD/D5L6BWwTkd7LYUu7AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;bash-2&quot;
+        title=&quot;&quot;
+        src=&quot;/static/73cd3ae3d4bd1f8b27e92e5a1762565d/6ff5e/bash-2.png&quot;
+        srcset=&quot;/static/73cd3ae3d4bd1f8b27e92e5a1762565d/135ae/bash-2.png 300w,
+/static/73cd3ae3d4bd1f8b27e92e5a1762565d/34e8a/bash-2.png 600w,
+/static/73cd3ae3d4bd1f8b27e92e5a1762565d/6ff5e/bash-2.png 1200w,
+/static/73cd3ae3d4bd1f8b27e92e5a1762565d/7c08e/bash-2.png 1754w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;bash-2&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这时候，容器就在后台运行了。如果服务器挂了，重启之后，你只需要运行：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# 启动容器&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; docker start c7bd43009fbe
+
+&lt;span class=&quot;token comment&quot;&gt;# c7bd43009fbe 为上一步生成的 容器 ID 值。&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这样看似十分完美了对不？但是还是有一些问题。&lt;/p&gt;
+&lt;h3 id=&quot;配置-volume&quot;&gt;&lt;a href=&quot;#%E9%85%8D%E7%BD%AE-volume&quot; aria-label=&quot;配置 volume permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;配置 volume&lt;/h3&gt;
+&lt;p&gt;在 docker 中，容器你可以想象成一台机器，容器之间是完全隔离的。在上面的例子里，我们如果上传了一个包，这个包会存在容器内。如果现在 verdaccio 镜像升级了，我们也需要迁移到新版本。那我们只能启动新的容器之后，重新在传原来上传过的包。包少还好，如果包很多的时候，这将会让你头疼至极！&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 172px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 88.95348837209302%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAAAsTAAALEwEAmpwYAAABdElEQVQ4y71UPY+CQBTkz/sT7CxMbOitpCGGwsbYXCOGD0FFjRAhURQE3u2sgKgYD+9ym0x2Wd6bffNmQZBl2TQMw1RV1ZzNZh+B5Rq6rluTyeRL2Gw29FfjeDyGAqsuZes0SZL0NwOE+/3eF0zT5Oz53kcjYwOz7/vB/xDifR5Truv2GhHWkT2SNpJcTaiR+Lnk8XhMg8GAFEUhSZKaSa7KKg4YDockiiJ1u11qt9uvWnEjZPfwR07iAHZXX3ahJLRtmzzPI03TyLKsO8zn8ztgD4oe49hetlqtboR4CMOwlPqmmjKmEscJWWFXQnzP5/P5yUXXdSkPpOVyybHb7eocz8BREq7X65KwashoNKJOp0O9Xo9arRaf+/3+k4lIA8ddhZfL5UlaEATkOA7HdDrl1b4wMdtut1fCxWJBAGShj+wXxHE4HOh0OlEURRw4EHMcx/xdNY7lZTCNE8IlVIIZlaCKAkXfABxarKsxeVyG3sLlb8RmYffULQhhAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;docker-container&quot;
+        title=&quot;&quot;
+        src=&quot;/static/eabace8a7dc5f610acee011a5caed6e0/23b3b/docker-container.png&quot;
+        srcset=&quot;/static/eabace8a7dc5f610acee011a5caed6e0/23b3b/docker-container.png 172w&quot;
+        sizes=&quot;(max-width: 172px) 100vw, 172px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;docker-container&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Verdaccio 镜像支持 VOLUME。VOLUMN 就像在你的机器上创建了一个软连接，连接到容器内。这两上传的包会存储在机器上，而不是容器内。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; docker run -it --rm --name verdaccio -p 4873:4873 -v ~/verdaccio:/verdaccio verdaccio/verdaccio&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;运行上面指令后会报错误：“fatal--- cannot open config file /verdaccio/conf/config.yaml: ENOENT: no such file or directory, open &apos;/verdaccio/conf/config.yaml&apos;”。&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 37.286202964652226%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsSAAALEgHS3X78AAABf0lEQVQoz6WQ207jMBCGCwKtuOYSFbpNajdpnINzcg51SNNWq21AXO17rfZ5FrQrlUjc8DwIy8PUu/ACWPr0z8ieTxqPRnh8IRMmmruvLN5NPN5bftLbYWawgrT38mXPhDS1HWSGQ235aT/1kx3mnR2k2ej/OXK4uE+bDThJBW4ugWDavIAZYkcCvOIa/Ko1/SwuDQSh+G6e4oxowAqyv+/CUzcWD+23G0jq1WvS9ZoV15rGpaa81HPMWSg0DmgrEtqOcm2HuSa80E5aa0/IV1a2KEwPwtN/wij/Xa2/A5frF3n7Q8XbW8W7nWKbXvnbGzVvtsqqVsrJloqUK0VEq0jRKopg/zKvOsC1/6DrxAgbuXrcyA7KYgl10eF6a3CKBmgtgVbSpFs1wLMagmwJHL+A432Mqx4yqTuYBdnThzAS9U83TJ6n1N1PbX8YEzaMqTdckgPMMMb6gjLEG67cEAmGS8cfJm6wnyzC5zFZ/DJCtlgcY3GOXH2S85MvZ8dvFBWbOQC9ijwAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;bash-8&quot;
+        title=&quot;&quot;
+        src=&quot;/static/4f612b73a834f351ebddfc5c30eebbc5/6ff5e/bash-8.png&quot;
+        srcset=&quot;/static/4f612b73a834f351ebddfc5c30eebbc5/135ae/bash-8.png 300w,
+/static/4f612b73a834f351ebddfc5c30eebbc5/34e8a/bash-8.png 600w,
+/static/4f612b73a834f351ebddfc5c30eebbc5/6ff5e/bash-8.png 1200w,
+/static/4f612b73a834f351ebddfc5c30eebbc5/7c08e/bash-8.png 1754w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;bash-8&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;意思是我们缺一个文件。这个文件呢，项目的 &lt;code class=&quot;language-text&quot;&gt;README.md&lt;/code&gt; 没有明确告知你，但是官方项目中是有的。 在项目的 &lt;a href=&quot;https://github.com/verdaccio/verdaccio/tree/master/conf&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;conf&lt;/a&gt; 目录下，我们能找到这个文件。我们直接将项目中的 &lt;code class=&quot;language-text&quot;&gt;default.yaml&lt;/code&gt; 文件拷贝到 &lt;code class=&quot;language-text&quot;&gt;~/verdaccio/conf/config.yaml&lt;/code&gt; 中。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;cd&lt;/span&gt; ~/verdaccio
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;mkdir&lt;/span&gt; conf
+&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;wget&lt;/span&gt; https://raw.githubusercontent.com/verdaccio/verdaccio/master/conf/default.yaml -O conf/config.yaml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 50.741163055872285%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsSAAALEgHS3X78AAACGUlEQVQoz6WSS2/aQBCACSXnXkpoExKKDTYvP7DXBj8B83KAJE6UpKeol6jH/pJwyf9pqdpTD/1BkdFMxxsSqeeu9Glnd1afZ7yby9HQ/Yip3jgR9d5SaHdXkmoSjFMn2qazUiyXx3xfs3hcU8yVqJhLsWMkosrs3G7syRr7bnpDlLs9bDojFKwARdNDgXlYNRyUeyE2+kMUTJfw+FxjPkp2wGm5EdZ0++eLcL+iso27SJD5UcpmF9CKlqDTrM8TMOJL0KfntE6e9whjfglatkeoo9O0EUxR0KxMuM+Ffpxsbu+/Ynx9l65uP8Py5g7COIHh4gq82Rk4kxWxBGswB3sUQ3+8gK4/BqU/gLreS+WscpVlwgIXUnITXXxCd3a+tUenqNMX29SiTC1LdLi+I1tn1I3nuEW/ommHW4naJ+GvV6Gk2xsznCKJtw1nBIobge5PoBtMwQinwIZzIgaFciSClh0AyaBNFXacwTYT/yOUdeubMxhjxwmflMlZ2naGaYN5adMOUjqc1g2HU+v2U3oJPNewKG/5aacfPqneCEXN+vEq1Jzh7yBOMJxeYbS6QY9ie7xERu27FHcHc9T8CbXpo0wvQNrNTaosq65Dt0zCP1xYyL8pvC2W7ktHx4+HH8SHYrm6fleurIvH1XWx/JHzviJyDmjv4ETgZOvDam19JEgPZVF6LJ0IX14qzEZ+d+X/Q75UEff+Ak7i7eXcSiIyAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;bash-9&quot;
+        title=&quot;&quot;
+        src=&quot;/static/4d7fe8b8a704460bb49fc26b1f4929fe/6ff5e/bash-9.png&quot;
+        srcset=&quot;/static/4d7fe8b8a704460bb49fc26b1f4929fe/135ae/bash-9.png 300w,
+/static/4d7fe8b8a704460bb49fc26b1f4929fe/34e8a/bash-9.png 600w,
+/static/4d7fe8b8a704460bb49fc26b1f4929fe/6ff5e/bash-9.png 1200w,
+/static/4d7fe8b8a704460bb49fc26b1f4929fe/7c08e/bash-9.png 1754w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;bash-9&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;执行完上面的指令之后，你可以在 &lt;code class=&quot;language-text&quot;&gt;~/verdaccio/conf&lt;/code&gt; 目录下发现一个 &lt;code class=&quot;language-text&quot;&gt;config.yaml&lt;/code&gt; 文件。&lt;/p&gt;
+&lt;p&gt;现在我们再一次执行上面的 &lt;code class=&quot;language-text&quot;&gt;docker run ...&lt;/code&gt; 指令。你会注意到，这次运行成功了。&lt;/p&gt;
+&lt;p&gt;我们现在试着上传一个包试试！这里我上传了一个 &lt;code class=&quot;language-text&quot;&gt;learn-verdaccio&lt;/code&gt; 的包。&lt;/p&gt;
+&lt;p&gt;传完包之后，我们可以在 &lt;code class=&quot;language-text&quot;&gt;~/verdaccio/conf&lt;/code&gt; 看到多出来了一些文件和目录。&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 35.23375142531357%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsSAAALEgHS3X78AAABa0lEQVQoz6WRy07CQBSGIcpSAdNSQokgbcECTrlMSy9Aa0FBCgGJURPfhC54M0x04TtBJuPpUBauneRrz/zT+XJOmkjAQqaLkeWtys1OcHPXnUdImj6XWwZ7q9ie13XnmGkGI6olxAiAlazpRiJeSbVj7rqDMW30hlQ1BvRWH9Bq16ZKx6Jy26J1yBumy/ZKnEfnNeww6nAmacbXSZiqavjTdMe0600OLXdCNGdEQEzgIoGLpIJ0UtEMtlfaJpGBKK/DN01zeEDOPQj1SJhiwp4/2/nLN9p/et4/rj/IcLYm1sOC9EYBGQYvBI8WBDk+EzHpX/ZV3KcVhCPhORPW2sY3HoyoYU+pNV5EnVLokiLbh3pK2/4SxvJgfPM4djyyqvcZTcujEsI/TJiExyUnvGb4/DbLFzYXnBCm+XyYEQphVhBZneZy4VVeDDnxOuQKMVDzYinki6VNrljeQvZ+6pD9GODsnySFspL4BVunkC67PrVdAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;bash-10&quot;
+        title=&quot;&quot;
+        src=&quot;/static/ec0a2837f87059ee40ea2097825b5f43/6ff5e/bash-10.png&quot;
+        srcset=&quot;/static/ec0a2837f87059ee40ea2097825b5f43/135ae/bash-10.png 300w,
+/static/ec0a2837f87059ee40ea2097825b5f43/34e8a/bash-10.png 600w,
+/static/ec0a2837f87059ee40ea2097825b5f43/6ff5e/bash-10.png 1200w,
+/static/ec0a2837f87059ee40ea2097825b5f43/7c08e/bash-10.png 1754w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;bash-10&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;htpasswd&lt;/code&gt; 文件存储着用户的账户密码等信息。&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;storage&lt;/code&gt; 存储着我们上传的一些包，或者如果你开启了包的缓存机制，这里可能也会存着你 &lt;code class=&quot;language-text&quot;&gt;npm install&lt;/code&gt; 下载的包。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;到这里，如果以后 verdaccio 镜像升级，我们并不需要做太多修改。只需要在执行一遍上面的 &lt;code class=&quot;language-text&quot;&gt;docker run ...&lt;/code&gt; 即可。&lt;/p&gt;
+&lt;h3 id=&quot;自定义-配置&quot;&gt;&lt;a href=&quot;#%E8%87%AA%E5%AE%9A%E4%B9%89-%E9%85%8D%E7%BD%AE&quot; aria-label=&quot;自定义 配置 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;自定义 配置&lt;/h3&gt;
+&lt;p&gt;上一节我们看到：在 verdaccio 项目的 &lt;code class=&quot;language-text&quot;&gt;conf&lt;/code&gt; 目录下，还有一个 &lt;code class=&quot;language-text&quot;&gt;full.yaml&lt;/code&gt; 文件。文件里有详细的英文描述，这里我对一些常用的参数进行说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;storage&lt;/code&gt;: 指定包存储的位置，默认 &lt;code class=&quot;language-text&quot;&gt;./storage&lt;/code&gt; 就是 &lt;code class=&quot;language-text&quot;&gt;/verdaccio/conf/storage&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;web&lt;/code&gt;: 和 web 站点相关的一些配置&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;auth&lt;/code&gt;: 访问权限的配置，可以限制网站注册的人数等。一般来说，都是搭建在内网的，其实可以不用配置这个，默认即可。&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;uplinks&lt;/code&gt;: 配置包搜索的时候，需要查询的 repositories。这里默认配置了 npm，我们可以加上 cnpm。为了节约空间，这里在设置的时候，我们需要打开 &lt;code class=&quot;language-text&quot;&gt;cache: false&lt;/code&gt; 属性。这样 拉取的包不会存储在机器上。&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;packages&lt;/code&gt;: 配置个匹配的包的访问和发布权限等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;剩下一些比方，配置 https，配置 notify，给钉钉发消息等。&lt;/p&gt;
+&lt;p&gt;下面放一个，我自己正在用的配置。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;yaml&quot;&gt;&lt;pre class=&quot;language-yaml&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;storage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; /verdaccio/storage
+
+&lt;span class=&quot;token key atrule&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Mine NPM
+  &lt;span class=&quot;token key atrule&quot;&gt;logo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; logo.png
+
+&lt;span class=&quot;token key atrule&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;htpasswd&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; /verdaccio/conf/htpasswd
+
+&lt;span class=&quot;token key atrule&quot;&gt;uplinks&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;npmjs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; https&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;//registry.npmjs.org/
+    &lt;span class=&quot;token key atrule&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean important&quot;&gt;false&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;yarnjs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; https&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;//registry.yarnpkg.com/
+    &lt;span class=&quot;token key atrule&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean important&quot;&gt;false&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;cnpmjs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; https&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;//registry.npm.taobao.org/
+    &lt;span class=&quot;token key atrule&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean important&quot;&gt;false&lt;/span&gt;
+
+&lt;span class=&quot;token key atrule&quot;&gt;packages&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;&apos;**&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;access&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; $all
+    &lt;span class=&quot;token key atrule&quot;&gt;publish&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; $authenticated
+    &lt;span class=&quot;token key atrule&quot;&gt;proxy&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; cnpmjs
+
+&lt;span class=&quot;token key atrule&quot;&gt;logs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; stdout&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; pretty&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;level&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; http &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token key atrule&quot;&gt;notify&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; POST
+  &lt;span class=&quot;token key atrule&quot;&gt;packagePattern&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; .*
+  &lt;span class=&quot;token key atrule&quot;&gt;packagePatternFlags&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; i
+  &lt;span class=&quot;token key atrule&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;&apos;Content-type&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;application/json; charset=utf-8&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;endpoint&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; https&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;//oapi.dingtalk.com/robot/send&lt;span class=&quot;token punctuation&quot;&gt;?&lt;/span&gt;&amp;lt;token&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;{ &quot;msgtype&quot;: &quot;actionCard&quot;, &quot;actionCard&quot;: { &quot;title&quot;: &quot;有包更新啦~\\(≧▽≦)/~&quot;, &quot;text&quot;: &quot;### {{name}} v{{dist-tags.latest}} 发布了 \n **描述** \n\n {{description}} \n\n **作者** \n\n {{maintainers.0.name}} &amp;amp;lt;{{maintainers.0.email}}&amp;amp;gt; \n&quot;, &quot;hideAvatar&quot;: &quot;0&quot;, &quot;btnOrientation&quot;: &quot;0&quot;, &quot;singleTitle&quot;: &quot;查看详情&quot;, &quot;singleURL&quot;: &quot;http://192.168.3.22:4873/#/detail/{{name}}&quot; } }&apos;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[让你的静态页面支持 https]]></title><description><![CDATA[什么是静态页面？在开始正文之前，为了让所有人都能看懂本篇文章，我先讲解一些很基础的知识。如果你对这些都已知晓，请直接看 CloudFire…]]></description><link>http://www.zyw.name/2018/05-18/let-your-static-page-support-https</link><guid isPermaLink="false">http://www.zyw.name/2018/05-18/let-your-static-page-support-https</guid><pubDate>Fri, 18 May 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;什么是静态页面？&quot;&gt;&lt;a href=&quot;#%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%EF%BC%9F&quot; aria-label=&quot;什么是静态页面？ permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;什么是静态页面？&lt;/h2&gt;
+&lt;p&gt;在开始正文之前，为了让所有人都能看懂本篇文章，我先讲解一些很基础的知识。如果你对这些都已知晓，请直接看 &lt;a href=&quot;#cloudfire&quot;&gt;CloudFire&lt;/a&gt; 一节。&lt;/p&gt;
+&lt;p&gt;静态页面就是没有数据库交互，对每个人显示的内容一样的页面。我们按设计稿撸出来的页面都是静态页面，只要将这些页面放在机器上，暴露一个地址，就可以访问到。&lt;/p&gt;
+&lt;h2 id=&quot;将静态页面放在-github-上&quot;&gt;&lt;a href=&quot;#%E5%B0%86%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E6%94%BE%E5%9C%A8-github-%E4%B8%8A&quot; aria-label=&quot;将静态页面放在 github 上 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;将静态页面放在 Github 上&lt;/h2&gt;
+&lt;p&gt;Github 允许你存放静态页面，从而让其他人看到。但是如果你有自己的服务器，你的静态页面也是可以变成动态的。Github 只是提供资源文件的托管，如果你的 JS 文件和远程服务器进行交互，这些 Github 都是不予限制的。&lt;/p&gt;
+&lt;p&gt;在 Github 上创建的任何一个项目，默认有一个 &lt;code class=&quot;language-text&quot;&gt;master&lt;/code&gt; 分支。Github 可以为每一个项目生成一个访问的地址，基本格式为: &lt;code class=&quot;language-text&quot;&gt;[项目名].[用户名].github.io&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;默认情况下，你将文件上传到项目的 &lt;code class=&quot;language-text&quot;&gt;gh-pages&lt;/code&gt; 分支即可。很多项目都是这么做的。但是 Github 也支持其他的方式：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 54.7244094488189%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABuElEQVQoz51Su3IUMRC8iA+Aj6AofsABv0MIKQGEFDkuSIkJ+AEXBKQUEZSLso3tO1ju9rBZ7Uqr5660zWhk74U8tqpLWs2oZ7pHC9E0WK1W+FFVODtfIoSA//mmjGnCwvoRQlrI3qJpBLQ28D4Q/AznHMHzedk7PrfWzv8xpUJofETdWAg9QioF0bZQfQ8pFbpO0iohRIuOVkXxtu1KjrrO6Tge41gIQ/BYLpdoRcMVjTGcmNH3mv+11rzvac2k18hq8nmOKxsxjIkIh4jNpeKK+XImtdbx6p2/kuYYWVqJF+xiJH1ILHsxDCO+HJ/i+7rm9nMXuDKY8S+DyZKHccRme4Fv1Rq/RAfrAqwvcH6gApYlGWMZ86Aopl2Cp87yjIkLKRHhGCO0caiow2qzRStJOkmVirwhOT4MZTjkWUaxhXw1Hp2JsCHNHabcYSRCJAo2W1h5CdNdoBc/4fuGCjtKi396fbM9KXuo6dm8/tDi1fsaL97W2D9YM16+q/H8oMabjwJTiiwnX9hhKph2hOzh10rg9qPP2Ht6grtPjnDn8RFuPTzEzQeHuHH/E+49O549mv5iQr8B8khIDg+UGj4AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;Github 对 Github Pages 进行配置&quot;
+        title=&quot;&quot;
+        src=&quot;/static/7fd3d77a8ca2f4476c9b813b7d4b3adb/6ff5e/1.png&quot;
+        srcset=&quot;/static/7fd3d77a8ca2f4476c9b813b7d4b3adb/135ae/1.png 300w,
+/static/7fd3d77a8ca2f4476c9b813b7d4b3adb/34e8a/1.png 600w,
+/static/7fd3d77a8ca2f4476c9b813b7d4b3adb/6ff5e/1.png 1200w,
+/static/7fd3d77a8ca2f4476c9b813b7d4b3adb/f42be/1.png 1524w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Github 对 Github Pages 进行配置&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;前往项目的&lt;strong&gt;设置&lt;/strong&gt;目录下，你会看到有一个 &lt;code class=&quot;language-text&quot;&gt;source&lt;/code&gt; 选项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;master branch&lt;/code&gt;: 将 master 分支作为静态页面存放分支。&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;master branch /docs folder&lt;/code&gt;: 将 master 分支下的 &lt;code class=&quot;language-text&quot;&gt;/docs&lt;/code&gt; 目录作为静态页面存放分支。&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;None&lt;/code&gt;: 默认选项，将 &lt;code class=&quot;language-text&quot;&gt;gh-pages&lt;/code&gt; 分支作为静态页面存放分支。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于个人博客，推荐创建一个项目：&lt;code class=&quot;language-text&quot;&gt;[用户名].github.io&lt;/code&gt;。并将静态页面传入该项目的 &lt;code class=&quot;language-text&quot;&gt;master&lt;/code&gt; 分支上。之后访问 &lt;code class=&quot;language-text&quot;&gt;[用户名].github.io&lt;/code&gt; 就能访问到页面了。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;注: 静态页面上传完之后，并不是立即就能访问的，因为中间有 CDN 同步之内的一些操作，有一定的延迟，等一会就行了。&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;开发静态页面的技术选型&quot;&gt;&lt;a href=&quot;#%E5%BC%80%E5%8F%91%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%E7%9A%84%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B&quot; aria-label=&quot;开发静态页面的技术选型 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;开发静态页面的技术选型&lt;/h2&gt;
+&lt;p&gt;Github 上有很多静态化技术，如:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;早期很出名的 &lt;a href=&quot;https://github.com/jekyll/jekyll&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;jekyll&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;后来 Node 流行，出现了 &lt;a href=&quot;https://github.com/hexojs/hexo&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;hexo&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;Go 语言写的 &lt;a href=&quot;https://github.com/gohugoio/hugo&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;hugo&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/facebook/react&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;React&lt;/a&gt; / &lt;a href=&quot;https://github.com/vuejs/vue&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Vue&lt;/a&gt; / &lt;a href=&quot;https://github.com/angular/angular&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Angular&lt;/a&gt; 等前端框架书写的网站。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在最后一条中，我已经将 &lt;a href=&quot;https://github.com/nozzle/react-static&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;react-static&lt;/a&gt;，&lt;a href=&quot;https://github.com/gatsbyjs/gatsby&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;gatsby&lt;/a&gt;，&lt;a href=&quot;https://github.com/facebook/Docusaurus&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Docusaurus&lt;/a&gt; 以及 &lt;a href=&quot;https://github.com/vuejs/vuepress&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;vuepress&lt;/a&gt; 包含进去了 😄。&lt;/p&gt;
+&lt;p&gt;甚至，你可以不选上面任何技术方案，直接手写。不过为了效率着想，还是选择成熟的方案为好。&lt;/p&gt;
+&lt;h2 id=&quot;修改访问域名&quot;&gt;&lt;a href=&quot;#%E4%BF%AE%E6%94%B9%E8%AE%BF%E9%97%AE%E5%9F%9F%E5%90%8D&quot; aria-label=&quot;修改访问域名 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;修改访问域名&lt;/h2&gt;
+&lt;p&gt;现在我们的静态页面已经可以访问了，但是呢访问地址肯定让很多人都不爽。不过没关系，Github 支持你修改域名。&lt;/p&gt;
+&lt;h3 id=&quot;购买域名&quot;&gt;&lt;a href=&quot;#%E8%B4%AD%E4%B9%B0%E5%9F%9F%E5%90%8D&quot; aria-label=&quot;购买域名 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;购买域名&lt;/h3&gt;
+&lt;p&gt;为了改域名，那得先买个域名。买域名可以去&lt;a href=&quot;https://cn.aliyun.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;阿里云&lt;/a&gt;，&lt;a href=&quot;https://www.west.cn/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;西部数码&lt;/a&gt;以及国外的&lt;a href=&quot;https://sg.godaddy.com/zh/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Godaddy&lt;/a&gt;等等。&lt;/p&gt;
+&lt;p&gt;买域名的过程我就不说了，和购物一样没啥区别。买的时候需要小心点，别被默认选项坑了就行（默认会勾选一些增值服务等）。&lt;/p&gt;
+&lt;p&gt;很多域名可能会做活动，首年很便宜，有的域名可能还免费，不过找一个自己满意的域名肯定十分的蛋疼，大家要有耐心啊。&lt;/p&gt;
+&lt;h3 id=&quot;a，cname-和-mx-记录&quot;&gt;&lt;a href=&quot;#a%EF%BC%8Ccname-%E5%92%8C-mx-%E8%AE%B0%E5%BD%95&quot; aria-label=&quot;a，cname 和 mx 记录 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;A，CNAME 和 MX 记录&lt;/h3&gt;
+&lt;p&gt;我们都知道，当我们输入一个网站例如：&lt;code class=&quot;language-text&quot;&gt;http://www.qq.com/&lt;/code&gt; 为何能到达腾讯的门户网站？为何输入别的就不行？这个就是在你访问的 DNS 机器上有这么一条记录。这条记录就像网址的身份证一样，身份证如果没了，那么你这个人相当于也没了。全球有 13 台跟根服务器，在上面可以找到你的这条记录的。其他遍布全球的 DNS 服务器，都是同步于跟服务器的。&lt;/p&gt;
+&lt;p&gt;A 记录用来指定域名对应的 IP 地址的。通俗来说就是告诉 DNS，当你输入域名的时候给你引导到对应的服务器。&lt;/p&gt;
+&lt;p&gt;CNAME 记录也叫别名记录，允许你将多个名字映射到同一台计算机。&lt;/p&gt;
+&lt;p&gt;MX 记录也叫邮件路由记录，用户可以将该域名下的邮件服务器指向自己的邮件服务器上。&lt;/p&gt;
+&lt;h3 id=&quot;修改记录&quot;&gt;&lt;a href=&quot;#%E4%BF%AE%E6%94%B9%E8%AE%B0%E5%BD%95&quot; aria-label=&quot;修改记录 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;修改记录&lt;/h3&gt;
+&lt;p&gt;各个域名服务商的控制台都各不相同，但大同小异。这里我以 &lt;a href=&quot;https://www.west.cn/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;西部数码&lt;/a&gt; 的为例（因为我的域名是在西部数码买的 😭）。&lt;/p&gt;
+&lt;p&gt;在 “域名管理” 目录下，找到 “域名解析” 服务。&lt;/p&gt;
+&lt;p&gt;我们添加一条 CNAME 记录：将 &lt;code class=&quot;language-text&quot;&gt;www.[域名]&lt;/code&gt; 映射到 &lt;code class=&quot;language-text&quot;&gt;[网站].github.io&lt;/code&gt; 地址上。&lt;/p&gt;
+&lt;p&gt;之后我们在静态项目更目录下补上一个 &lt;code class=&quot;language-text&quot;&gt;CNAME&lt;/code&gt; 文件，&lt;code class=&quot;language-text&quot;&gt;CNAME&lt;/code&gt; 文件内写上：&lt;code class=&quot;language-text&quot;&gt;www.[域名]&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;提交代码之后等待一会儿即可。&lt;/p&gt;
+&lt;h2 id=&quot;cloudfire&quot;&gt;&lt;a href=&quot;#cloudfire&quot; aria-label=&quot;cloudfire permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CloudFire&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cloudflare.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;CloundFire&lt;/a&gt; 是国外 DNS 服务提供商。我们需要靠他才能让我们的页面支持 HTTPS。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先，我们创建一个账号。&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 53.61911454673226%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB7klEQVQoz42SXW/TMBSG859RuaCsHVOyX4CExMUkLhBICCS0iY0iQFyAgDFYQRpiSbu0zVebriFxYuf75TgtZaAhzdKj49jnvH7jY+V7/xQ/Dj/BHC0wPPMxGPgwhsTZHIZJjM5hjBcwJoQVQJfYP6E7IXQ3hDGNMPAlDIM5g7LR2kOn3UNn4zk2tVfQbr+Feucd1Lvvoe18hHbvENr9I6gPP0N99AXqkz62nvZxa/crtp59Q3f/BNf3dbReDNF6bULZ7hxA2+yh2+1hh4rjrGhgaY5FFGPBYpxHDPMoWsYwRMgTysmQlzlOvAA3DnS0Xw7RfkOCuj6CYYyg6yYmExcXR5am4EmCNBXNXCI4R1kU6xzOBU5NC/rYblA8z4XEdR34/gx1Xa9YFqTSCQkURYk8L1BWVbNerxKE4HAdGx7Ve44DxbZtSCzLwnQ6WyfKUVGxEAJVWaKuShItkOXFX4Kc9i1LajiNjuLQxHGWH7PZH8G1g4zuknEELEEQp5c4FE2t1JAovyf/CpbVMu4dj3HtwQdou8e4+fgIfiSW7q8qKH9TisooL5KJHNOQY0HupFhRXthvmsL/L+h5HhhjDUkcI6EOy67m1OWULj8j5Jokpn1JEARXc8goOQwjEqdIbzCiQ6LVYTJm1P3LHP4CvfstGcBUPg8AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;Create an account for CloudFire&quot;
+        title=&quot;&quot;
+        src=&quot;/static/b88b0dbf28e85bd1bbb6baf99c3df3ee/6ff5e/2.png&quot;
+        srcset=&quot;/static/b88b0dbf28e85bd1bbb6baf99c3df3ee/135ae/2.png 300w,
+/static/b88b0dbf28e85bd1bbb6baf99c3df3ee/34e8a/2.png 600w,
+/static/b88b0dbf28e85bd1bbb6baf99c3df3ee/6ff5e/2.png 1200w,
+/static/b88b0dbf28e85bd1bbb6baf99c3df3ee/79a4a/2.png 1800w,
+/static/b88b0dbf28e85bd1bbb6baf99c3df3ee/2fb56/2.png 2400w,
+/static/b88b0dbf28e85bd1bbb6baf99c3df3ee/70773/2.png 2846w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Create an account for CloudFire&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;创建一个项目，这里填写自己购买的域名。&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 43.196092114445214%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABqElEQVQoz3WQXWsTQRSG91drENs0q3grFBQvvBCKgiB4YbG1lrZUo4iI2QZRmyZttpnZ3eZj3U02u8l+PO4kWU38GHg4M+e85505o12c1BDSwzR7tNs9LHuI5eRcjZCKboDsKcbIfs4gRLqKCPkjwvIj2v0hphtw6Y3RNtb3qVReo9854PbdY25tvkW/V0V/8B794Qf0Rx/Rtz5RefKZjac1ys8Mys/rlF98Yf3lV27sNCjttygdXVB6Y6Lpa7us3XzF5v132F6IM8zx59H2A4Tr5S/xsTyfq9FohjMa0h+POOu5lPcaXNtrUjo85/pxG61+0sQwzvh+avLnmoQh7mCA67p4nkcaxyv1JE6otzrUmh2MlsA4F2iOY+E4km7XIU0zsmxOkqaE4ThvyxbtGZPJZFZLlSbPTKdTHEuuoAkh6HQElmXPxLPWRfSCkMfVU7aqDbZrbVX4dSELQyEkyqNAk3KesO0lw2LkJGW3Ltg2Ljn6Zv31JXH+BUW/iooVQyVIkiQnZprvg2iysM/J0tlZaQpdFEX/N5RLyQKVNzu/UeP9S7McfwL9sJMxBhUWEAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;Create a project&quot;
+        title=&quot;&quot;
+        src=&quot;/static/717aee42c233aeee7bd1c7b92db9db48/6ff5e/3.png&quot;
+        srcset=&quot;/static/717aee42c233aeee7bd1c7b92db9db48/135ae/3.png 300w,
+/static/717aee42c233aeee7bd1c7b92db9db48/34e8a/3.png 600w,
+/static/717aee42c233aeee7bd1c7b92db9db48/6ff5e/3.png 1200w,
+/static/717aee42c233aeee7bd1c7b92db9db48/79a4a/3.png 1800w,
+/static/717aee42c233aeee7bd1c7b92db9db48/2fb56/3.png 2400w,
+/static/717aee42c233aeee7bd1c7b92db9db48/e8cde/3.png 2866w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Create a project&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;创建之后会进行 DNS 查询，可能会查询失败，失败之后需要我们手动添加一下。&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 44.28172942817294%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABQ0lEQVQoz3WSzW6DMBCEef/n6a2vUPVY9VYRbCAEG0gAg/mZ7lhAyCGWBi/YfN6dddSYAo36hRs9BucwTRPejXVdD52H9x6PxwNd1yFSSuOiU9R1DS+wqqpCzJmbeAA1zzOWZXmZKcL7vofWGmmaIoovF2ilBCDAoUdZlrjdym2+BRljcL/fw0HMgiJkGIYAZ6yEQWgUJyoArWSEycG7Fs71YdM4jof4zoybpgnA83jJMJMH6dbabdWgtiWyLA8/OvGVHrFsApk57eD3yY9PoDACMN2A3MT06SMBjOnP7te5MQsbI9+7waP381HyC5D+tG2LUjxjzGwoHsSs6CHXrfhpbCWFKHx+/eDj+09uB4H6CUyS5OhsHMdSbhYsIKgoihDvMmyWKM9zXK9XVFujDg/PJe8l7dfh3ZiXFX5h6Qg6l/wP+kay/m+jGe8AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;Search DNS&quot;
+        title=&quot;&quot;
+        src=&quot;/static/64afdc410d652830ff63221f58ca6f6c/6ff5e/4.png&quot;
+        srcset=&quot;/static/64afdc410d652830ff63221f58ca6f6c/135ae/4.png 300w,
+/static/64afdc410d652830ff63221f58ca6f6c/34e8a/4.png 600w,
+/static/64afdc410d652830ff63221f58ca6f6c/6ff5e/4.png 1200w,
+/static/64afdc410d652830ff63221f58ca6f6c/79a4a/4.png 1800w,
+/static/64afdc410d652830ff63221f58ca6f6c/2fb56/4.png 2400w,
+/static/64afdc410d652830ff63221f58ca6f6c/a02ce/4.png 2868w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Search DNS&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;之后我们获取到了两个 DNS 地址 &lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 50.17470300489168%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB9ElEQVQoz4WR7WvTUBTG+0dvXwpT2nWInxWEfRGFoeALDDeGdopCZaDSWXTKaJM0bXPTNO8vN2lykzyem1YRUXzgcJKb5/zOOTet8ZWGyfAzVM3D9bUJRXWgzwNMZSxCTI0QGougmTG0JYWVQFtxaHYKzaFwM0zsGGM7guJxtPZ2TrDXfoVO7zVu3Rng4O579O5RHF7g4P4H9B5+RO/oE3qPh9h/con95yN0j0fonHxB5+wruv0rtPtj7L6ZYvfdDK3b3Ze42T7D02cjrKsKyVogExV4IeDFHH7CEfKUcoKAngPO6VuBrBRIihxVLfBoZGCnr+DGgICKOoOq6LAsG1I1QbOUI6VC3/PgOA4C34fnunBsu8mc4FmaoirLpsayXUz0ObQFQ2u5NMGYAZeMUkJQZyrgfAMNggCe5yOkLD1hGCIlmPQUtIWU6zpgiwWWjICGwbCgF8dxUdc1KpqwohzyNaJMIC+r5jzJcqS5QJyuYdJENYFK8ko51GhODEMCGdsAZXdZKFeWZn0VQLUCxHSnJa228iN4YYSZYeL0/C01RdN8M6HbMNjfgNIkcy7KZiJRboqk1nSWFRR50XjK7R3+EyjVrLwNKcUK8eJSx/FQh7qKNj/u59X8b8LfJe9R6pvh4+hCwYPBGN9ZsG1a/wL/CfwBeKDkYS7zU+8AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;Get two DNS address&quot;
+        title=&quot;&quot;
+        src=&quot;/static/6035695a8a76cebf340f068081567e92/6ff5e/5.png&quot;
+        srcset=&quot;/static/6035695a8a76cebf340f068081567e92/135ae/5.png 300w,
+/static/6035695a8a76cebf340f068081567e92/34e8a/5.png 600w,
+/static/6035695a8a76cebf340f068081567e92/6ff5e/5.png 1200w,
+/static/6035695a8a76cebf340f068081567e92/79a4a/5.png 1800w,
+/static/6035695a8a76cebf340f068081567e92/2fb56/5.png 2400w,
+/static/6035695a8a76cebf340f068081567e92/25763/5.png 2862w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Get two DNS address&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;由于我的域名在 西部数码 购买的，所以这里我以西部数码为例对 DNS 服务器进行修改 &lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 44.622905027932966%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAABYlAAAWJQFJUiTwAAABWklEQVQoz4VSu04DMRC8T6aGH6KkgJ4KCSlRmhR0FIT4nr7z63znxw1r5xCESMTSaK2Vd3Z2x8Xz7gPbzQaCt1gWwDkPLjRKriGlgjEGWmuKI3rZQxsNa6c1b3I+RR8CQogonl/3eNnu8fbOUDU9mi5BoGoHNG2Plgt0YkQ7aPQr+KAwSHOBnoQUt48cNw8Sd08SXFqM1J33Ano83aUQq9IR0zRhnuccQ1b0gxgDnPcojjXHgTXUQUNbD2UDDmUHOQaMc6DxbIZz7gpmzBSLsmQ4fh4ghoFUOSLyRNhCGAdLhI4UpYIY44Wqc4UR3gcUrKxwZAzDL8LPqiNCD+vOC5bkGp0U/yKdbEpZ1ajrGkopGnlVyFoMpND5SM9iJvsm/A+ZkJM702RzgVl3yMhtRffeBDTq9B2uEWJZFXbkbNpTjEt2cFkCLXdOA2DPZtzvxvzHQPnlCtJqvgANIre6JWfXmgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;Change DNS Server&quot;
+        title=&quot;&quot;
+        src=&quot;/static/c6c0367aeb39cc5f8dbf57db0293d971/6ff5e/6.png&quot;
+        srcset=&quot;/static/c6c0367aeb39cc5f8dbf57db0293d971/135ae/6.png 300w,
+/static/c6c0367aeb39cc5f8dbf57db0293d971/34e8a/6.png 600w,
+/static/c6c0367aeb39cc5f8dbf57db0293d971/6ff5e/6.png 1200w,
+/static/c6c0367aeb39cc5f8dbf57db0293d971/79a4a/6.png 1800w,
+/static/c6c0367aeb39cc5f8dbf57db0293d971/2fb56/6.png 2400w,
+/static/c6c0367aeb39cc5f8dbf57db0293d971/93eac/6.png 2864w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Change DNS Server&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;点击下一步之后，我们就等待几个小时就行了（可能几分钟就行了）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现在，我们地址以 &lt;code class=&quot;language-text&quot;&gt;https&lt;/code&gt; 开头进行访问，是不是已经可以看到自己的网站了？Cool！&lt;/p&gt;
+&lt;h2 id=&quot;强制-https-访问&quot;&gt;&lt;a href=&quot;#%E5%BC%BA%E5%88%B6-https-%E8%AE%BF%E9%97%AE&quot; aria-label=&quot;强制 https 访问 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;强制 HTTPS 访问&lt;/h2&gt;
+&lt;p&gt;虽然我们的网站可以 &lt;code class=&quot;language-text&quot;&gt;https&lt;/code&gt; 进行访问，但是我们 &lt;code class=&quot;language-text&quot;&gt;http&lt;/code&gt; 也能进行访问。这里我们需要去 Github 上设置一下：&lt;/p&gt;
+&lt;p&gt;在项目的设置页面下，我们可以找到一个 &lt;code class=&quot;language-text&quot;&gt;Enforce HTTPS&lt;/code&gt; 选项，我们勾选上它，等待一会~&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 77.19950433705081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAABYlAAAWJQFJUiTwAAACBElEQVQ4y52T2W7bMBBF/f8/1zQFCqRo4laStVHcJUqkltshZctO0D6kNi5mTNKHs/E0jiPyLENVlXh9O2NwDv/z2bYt2dPkF2SVQdH0UMpACgmjDYxS0CSjNQTn5BsoqcA7QWcU+Tqd5R3H6KYDenKLxzf9hi/iB57lC574dzyrM55kjieRJftVZnj1RdLPKd/9UFzXcpyXC8qN7cCwzcinCoWvUS4Ml7khcRSzwmVRyZZkGXZ1SZJ8iQYCLdl642CrxBqBkVoWFdqqhaW0rLIYbE8pa2hKzWqT1nuzrxkzQdoV3m/X4t213YC2t2CMoWnpPinRkh+b40NICqR5nhFI87IgLBuWdUP6bg/2BtRU+LZlEELAxuiMhSPgNE1H9/7V2dv+O2BTN8iyHJdLiZ6ANskmsDEGmmTdAkP6CPgrUFJtWsbRMCo51WykyKar4pyOI1m/YgrrDniA7Sl/APaDA+MiQd04fXakkw5gbHVHw1lT2l3XpQZ475PdI5wOe/Pj/nEmLBgp8mXdoz/FOyLw1+8s1ZERNKqq61S/VEN9V/wda9z3PdwwwAwBaqDOz+s95VizIW5SE7wPWOm2GMln3/K9KfQmY3QFdVnSe90vcBTF8E62dzSflLobaazGo2EhzA9AosdoYtqcGsNpFgVdcBO/WhUnQVgIcwfFOsb/PgL/ADW9iovZiOj/AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;Enforce HTTPS&quot;
+        title=&quot;&quot;
+        src=&quot;/static/0b6ce35027584e0fedc658a6e24aa660/6ff5e/7.png&quot;
+        srcset=&quot;/static/0b6ce35027584e0fedc658a6e24aa660/135ae/7.png 300w,
+/static/0b6ce35027584e0fedc658a6e24aa660/34e8a/7.png 600w,
+/static/0b6ce35027584e0fedc658a6e24aa660/6ff5e/7.png 1200w,
+/static/0b6ce35027584e0fedc658a6e24aa660/e3614/7.png 1614w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Enforce HTTPS&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;现在访问 &lt;code class=&quot;language-text&quot;&gt;http&lt;/code&gt; 地址试试？是不是立即就跳转到 &lt;code class=&quot;language-text&quot;&gt;https&lt;/code&gt; 去了？&lt;/p&gt;</content:encoded></item><item><title><![CDATA[iview 使用经验总结]]></title><description><![CDATA[最近开始接触 vue 和 iview。这次将最近使用的经验总结给大家，希望对刚接触 iview 的开发者有一定的帮助。什么是 iviewiview 是基于 vue 开发的主题框架。其设计理念来源于 Ant Design。可以算是 Vue 中的 Ant Design…]]></description><link>http://www.zyw.name/2018/04-09/iview-usage-experience</link><guid isPermaLink="false">http://www.zyw.name/2018/04-09/iview-usage-experience</guid><pubDate>Mon, 09 Apr 2018 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;最近开始接触 vue 和 iview。这次将最近使用的经验总结给大家，希望对刚接触 iview 的开发者有一定的帮助。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;什么是-iview&quot;&gt;&lt;a href=&quot;#%E4%BB%80%E4%B9%88%E6%98%AF-iview&quot; aria-label=&quot;什么是 iview permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;什么是 iview&lt;/h2&gt;
+&lt;p&gt;iview 是基于 vue 开发的主题框架。其设计理念来源于 &lt;a href=&quot;https://ant.design/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Ant Design&lt;/a&gt;。可以算是 Vue 中的 Ant Design。项目主要是由开发者 &lt;a href=&quot;https://github.com/icarusion&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;icarusion&lt;/a&gt; 进行维护。&lt;/p&gt;
+&lt;h2 id=&quot;iview-介绍&quot;&gt;&lt;a href=&quot;#iview-%E4%BB%8B%E7%BB%8D&quot; aria-label=&quot;iview 介绍 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;iview 介绍&lt;/h2&gt;
+&lt;h3 id=&quot;组件&quot;&gt;&lt;a href=&quot;#%E7%BB%84%E4%BB%B6&quot; aria-label=&quot;组件 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;组件&lt;/h3&gt;
+&lt;p&gt;在 iview 中，一些组件需要同时出现才能起作用：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Select&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Option&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Tabs&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;TanPane&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Form&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Collapse&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Pane&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Timeline&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;TimelineItem&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Menu&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;MenuItem&amp;gt;&lt;/code&gt;,&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Submenu&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;DropdownMenu&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;DropdownItem&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Breadcrumb&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;BreadcrumbItem&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Steps&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Step&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一些组件成对出现会影响样式和效果等：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;ButtonGroup&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Button&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;RadioGroup&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Radio&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;CheckboxGroup&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;CheckBox&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一些组件是通过方法调用的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;$Message&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;$Notice&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;$Modal&lt;/code&gt;或&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Modal&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;$Loading&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;事件&quot;&gt;&lt;a href=&quot;#%E4%BA%8B%E4%BB%B6&quot; aria-label=&quot;事件 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;事件&lt;/h3&gt;
+&lt;p&gt;iview 组件暴露的事件，都是以&lt;code class=&quot;language-text&quot;&gt;on-&lt;/code&gt;开头的，比方&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Select&amp;gt;&lt;/code&gt;组件的&lt;code class=&quot;language-text&quot;&gt;on-change&lt;/code&gt;等。&lt;/p&gt;
+&lt;p&gt;这些事件，你都可以在官方文档对应组件文档最下面找到。&lt;/p&gt;
+&lt;p&gt;所以代码中事件需要写成：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;select&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;@on-change&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;() =&gt; {}&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;select&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;自定义表单组件&quot;&gt;&lt;a href=&quot;#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8%E5%8D%95%E7%BB%84%E4%BB%B6&quot; aria-label=&quot;自定义表单组件 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;自定义表单组件&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;iview&lt;/code&gt;本身只提供了一些常用的表单组件：&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Input&amp;gt;&lt;/code&gt;，&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Radio&amp;gt;&lt;/code&gt;，&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Select&amp;gt;&lt;/code&gt;等。有时候，我们需要使用封装了业务逻辑的表单。&lt;/p&gt;
+&lt;p&gt;在学习 vue 时，我们都知道自定义组件的&lt;code class=&quot;language-text&quot;&gt;v-model&lt;/code&gt;的实现方式是，通过&lt;code class=&quot;language-text&quot;&gt;value&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;input&lt;/code&gt;事件实现（可以自定义）。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// https://github.com/iview/iview/blob/2.0/src/mixins/emitter.js&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Emitter &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Emitter&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;custom-component&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  mixins&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Emitter&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  props&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// value&lt;/span&gt;
+    value&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; String&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;token function&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  methods&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;_onChange&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// v-model&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;$emit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;input&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; val&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// 符合 iview 自定义事件&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;$emit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;on-change&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; val&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// 自定义 iview 表单组件 必写该行&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;dispatch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;FormItem&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;on-form-change&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;val&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上面的&lt;code class=&quot;language-text&quot;&gt;this.dispatch(&amp;#39;FormItem&amp;#39;, &amp;#39;on-form-change&amp;#39;, this.val)&lt;/code&gt;可能会让你感到困惑，不过没关系，下一节将会让你弄明白。&lt;/p&gt;
+&lt;h2 id=&quot;iview-组件实现揭秘&quot;&gt;&lt;a href=&quot;#iview-%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%8F%AD%E7%A7%98&quot; aria-label=&quot;iview 组件实现揭秘 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;iview 组件实现揭秘&lt;/h2&gt;
+&lt;p&gt;为了更好的理解该节，我们以&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Form&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;为例来解密组件间的通信：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;&amp;lt;!-- template --&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;Form&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;form&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;:model&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;formModel&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;FormItem&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;prop&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;user&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;:rules&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;userRules&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;Input&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;text&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;v-model&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;formModel.user&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;placeholder&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;Username&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;Input&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;FormItem&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;FormItem&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;prop&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;pass&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;:rules&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;passRules&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;Input&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;password&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;v-model&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;formModel.pass&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;placeholder&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;Password&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;Input&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;FormItem&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;FormItem&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;Button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;primary&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;@click&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;handleSubmit&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;SUBMIT&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;Button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;FormItem&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;Form&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// javascript&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      formModel&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      userRules&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; required&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; message&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Username cannot be empty&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      passRules&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; required&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; message&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Password cannot be empty&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  methods&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;handleSubmit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$refs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;validate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;valid&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;valid&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$Message&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Not valid&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token comment&quot;&gt;// console. the result&lt;/span&gt;
+        console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;dir&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;formModel&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上面是一个简单的表单示例。当你未输入用户名密码，点击&lt;code class=&quot;language-text&quot;&gt;SUBMIT&lt;/code&gt;按钮时，你会看到在对应输入框下会显示出错误提示。&lt;/p&gt;
+&lt;p&gt;然而在&lt;code class=&quot;language-text&quot;&gt;handleSubmit&lt;/code&gt;中，我们只调用了&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Form&amp;gt;&lt;/code&gt;组件的&lt;code class=&quot;language-text&quot;&gt;validate&lt;/code&gt;方法。在&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Form&amp;gt;&lt;/code&gt;组件中，&lt;code class=&quot;language-text&quot;&gt;validate&lt;/code&gt;方法调用了&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;组件中的&lt;code class=&quot;language-text&quot;&gt;validate&lt;/code&gt;方法。&lt;/p&gt;
+&lt;p&gt;这里就有一个疑问了：为什么&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Form&amp;gt;&lt;/code&gt;中可以调用到&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;中的&lt;code class=&quot;language-text&quot;&gt;validate&lt;/code&gt;方法呢？&lt;/p&gt;
+&lt;p&gt;有些人可能说，这很简单，我们可以在&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Form&amp;gt;&lt;/code&gt;里向下遍历子节点，搜集所有的&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;节点。&lt;/p&gt;
+&lt;p&gt;这样确实可以，但是很麻烦。&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Form&amp;gt;&lt;/code&gt;下的&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;所属层级可能各不相同，从而造成很难遍历完整，且性能低下，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 629px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 54.213036565977745%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA+UlEQVQoz51TSQ6EMAzr//8HiOXCAcGBA/tOMnVER6i0jDSRrLRNahsIKk1TqqqKh2Ggvu/ZBV3jeZ55mibJ2Jvza03jOHLTNKRQ0IS0bRvv+87INtZ1FaKyLLkoCiHD+bIsUkPWezGk4Kyua+66ThrhAg0gAMwl1Nu2hQsRdoWuk4JVNEI5z3MhISI+jkMyCNEDofM8v5dRu+MiFIey8AUeDYSAcWYI7CyExqFRt1XfCO9uH4Q+1b8J4dD1XnyE3neIGcKX86mC0Mwb1jiHuA2EzOHlgN4cGvwIwiSoOI4piiIOgoA02AXdw1mWSU6S5AFw6D+OwzCkD7itVcIbFalUAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;Form 下 FormItem 层级各不相同&quot;
+        title=&quot;&quot;
+        src=&quot;/static/aca5c8ad79af6b496becf8c49df31d64/89f99/1.png&quot;
+        srcset=&quot;/static/aca5c8ad79af6b496becf8c49df31d64/135ae/1.png 300w,
+/static/aca5c8ad79af6b496becf8c49df31d64/34e8a/1.png 600w,
+/static/aca5c8ad79af6b496becf8c49df31d64/89f99/1.png 629w&quot;
+        sizes=&quot;(max-width: 629px) 100vw, 629px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Form 下 FormItem 层级各不相同&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Form&amp;gt;&lt;/code&gt;组件内部并不是这样的。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// Form&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// https://github.com/iview/iview/blob/2.0/src/components/form/form.vue&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;iForm&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;token function&quot;&gt;provide&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; form&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;token function&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      fields&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// created&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;$on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;on-form-item-add&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token parameter&quot;&gt;field&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;field&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;fields&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;field&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;$on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;on-form-item-remove&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token parameter&quot;&gt;field&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;field&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prop&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;fields&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;splice&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;fields&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;field&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  methods&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;validate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;resolve&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;/* some code */&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;fields&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;field&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token comment&quot;&gt;// call the validate method of &amp;lt;FormItem&gt;&lt;/span&gt;
+          field&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;validate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;在&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Form&amp;gt;&lt;/code&gt;组件创建完毕时，监听了两个事件：&lt;code class=&quot;language-text&quot;&gt;on-form-item-add&lt;/code&gt;用于收集&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;对象，从而在后面调用其&lt;code class=&quot;language-text&quot;&gt;validate&lt;/code&gt;方法进行表单验证；&lt;code class=&quot;language-text&quot;&gt;on-form-item-remove&lt;/code&gt;用于移除无用的&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;对象。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;相对较为复杂一点，我将核心代码进行了简化：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// https://github.com/iview/iview/blob/2.0/src/mixins/emitter.js&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Emitter &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Emitter&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;FormItem&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  mixins&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Emitter&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  inject&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;form&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;token function&quot;&gt;mounted&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;dispatch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;iForm&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;on-form-item-add&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;token function&quot;&gt;beforeDestroy&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;dispatch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;iForm&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;on-form-item-remove&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  methods&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;validate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// some code&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;要理解上面的代码，需要先理解&lt;code class=&quot;language-text&quot;&gt;Emitter&lt;/code&gt;这个 mixin。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// https://github.com/iview/iview/blob/2.0/src/mixins/emitter.js&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;broadcast&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;componentName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eventName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; params&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$children&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;child&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; child&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$options&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;name &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; componentName&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      child&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;$emit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;child&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;eventName&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;concat&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;params&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// todo 如果 params 是空数组，接收到的会是 undefined&lt;/span&gt;
+      &lt;span class=&quot;token function&quot;&gt;broadcast&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;child&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;componentName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eventName&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;concat&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;params&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  methods&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// 触发父组件监听的一个事件&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;dispatch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;componentName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eventName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; params&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; parent &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$parent &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$root&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; parent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$options&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+      &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;parent &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;name &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; name &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; componentName&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        parent &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; parent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$parent&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;parent&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; parent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$options&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;parent&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        parent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;$emit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;parent&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;eventName&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;concat&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;params&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// 触发子组件监听的一个事件&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;broadcast&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;componentName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eventName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; params&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token function&quot;&gt;broadcast&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; componentName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; eventName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; params&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;dispatch(componentName, eventName, params)&lt;/code&gt;用于触发当前组件父组件&lt;code class=&quot;language-text&quot;&gt;&amp;lt;componentName&amp;gt;&lt;/code&gt;的&lt;code class=&quot;language-text&quot;&gt;eventName&lt;/code&gt;事件，并传参&lt;code class=&quot;language-text&quot;&gt;params&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;broadcast(componetName, eventName, params)&lt;/code&gt;用于触发当前组件子组件&lt;code class=&quot;language-text&quot;&gt;&amp;lt;componentName&amp;gt;&lt;/code&gt;的&lt;code class=&quot;language-text&quot;&gt;eventName&lt;/code&gt;事件，并传参&lt;code class=&quot;language-text&quot;&gt;params&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;现在是不是理解了 iview 组件之间的通信方式？很简单对吧！？&lt;/p&gt;
+&lt;p&gt;在前面，我提到了创建自定义组件时，需要加上一段&lt;code class=&quot;language-text&quot;&gt;this.dispatch(&amp;#39;FormItem&amp;#39;, &amp;#39;on-form-change&amp;#39;, this.val)&lt;/code&gt;。其实，在&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;组件中，就监听了这个事件，在事件监听的回调里，会进行表单的校验。所以，我们需要每次值变化通知&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;，从而造成表单的校验。&lt;/p&gt;
+&lt;h2 id=&quot;在-iview-基础之上封装自己的业务组件&quot;&gt;&lt;a href=&quot;#%E5%9C%A8-iview-%E5%9F%BA%E7%A1%80%E4%B9%8B%E4%B8%8A%E5%B0%81%E8%A3%85%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%9A%E5%8A%A1%E7%BB%84%E4%BB%B6&quot; aria-label=&quot;在 iview 基础之上封装自己的业务组件 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;在 iview 基础之上封装自己的业务组件&lt;/h2&gt;
+&lt;p&gt;iView 很像 Ant Design。Ant Design 有一个著名的项目——&lt;a href=&quot;https://pro.ant.design/index-cn&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Ant Design Pro&lt;/a&gt;，基于 Ant Design 封装了一系列高级组件。&lt;/p&gt;
+&lt;p&gt;为了让开发更为高效和便捷，我也根据&lt;code class=&quot;language-text&quot;&gt;Ant Design Pro&lt;/code&gt;仿写了一系列的 vue 版本组件。&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 414px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 294.6859903381643%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAA7CAYAAAB7c6ruAAAACXBIWXMAABYlAAAWJQFJUiTwAAAHbElEQVRYw4VXW3PbZBDNzwEeuHSGJnZsx3bim2xJ1sWSZfkq35OmaZsWmOEHwADDA2+0wwww5Z/wyvDAZYY3yh9Z9qwsx3Yk9eEb2U60Ort7ztnV0QfLP6jx4jcq3f5OwRe/kvL5P9T/8l8af/2Ggm/e0PCrN/J59u1/9GD9N70T/Envzf6id6d/yfXwHD1wXtGx95Ky/vfUWnxHjdVPZFy/Ju3qZ/Kevabm6kcyb36R7w+9H+h96yV92HlJH3Ve8fWVXHfPUS6fo5NMhlqqSkpLI3c4puDqCVkdhwy7Qz2/T92eTy1dp67n0Gq1IMPQKJM9oXwhR7n86d45yp2V6bRQolKlRqWLCim6RW2nR02tTZW6woEMeVCl1uC/16imqFTm/8U9cu/B4YAlyuQKfGObWhykN1nQ4uYFef6AOt0e9QYjmkxn1DYt+vgkS8dZzug0zwGLhHsR+PTs7kjAbP5MnnrOp9m2SO90qd5sCUJF1RlV+LnBSBtNler8vXRe2QYNA4eftwhxo9JSyRvPaCkI+1xHl0bBVBB2+XswX5LPiEeTgAO36GHmVO69Q1u8Q3jBNarUG6SaHUbohWj4aIZJKtcRiHXTlrIoqkbVRpN0q0NNBhKLEDfU+J86/ki67Ho9CQZEg9GYbKdLw8mUazqk4XgiD3F6IQNiAp5JnVAbw/XJHQRhk/gmU+jjSAmAJmoKQOB6cpqQMop+UaszZTzyg6Ugamq6BMPxGZluWPK/+WJ524yUpmiMQCNnMKHR4opMDgJ0/VEgTegyjUB03HgaBTkImjukTblSpZZhk9Ubkto2pARNpM3BUU88FP+7m2JsQCG2BmLrTOw5zR/fSrE7XU+a4kOOswXN5guhjmnbUrtcEkI8qXRRpTIfRTdJs92wSUxiUAef1bYpNT6v1umsfBGLbh+hHiL0gwWtbz8jrz8QhMPxlMZMbtcL6XFI5PQabhA227YQV9DxFQfIkjobixAcw+mOprR6+gn1GCGoA4MYMJFN7nAktTSUe9IDCs1i3rF91ZSmWBjMIDKE0Cw0OYViOR1hfXOjzZSZXN5wl/tksFYtdp5ef0iW8NIVGaK2qQGBEIiqDYXMbl/ShlbbHBCGAKWgafiM5gD5W4mNdKp84IXgIlQh3NwEBgMaXGOHTQPNyuyZbPF+ysrGPF2W3nj5iCzHJdvlprieuLe5TXkiLg7nycekve/Y1ZpID2nDGICkroDcYVNQBqSO35F2Om12pLd88kL80JHjs0GMyWGkFtMoYPfuM8rBOCCN9R5JcM9tsvwFpMacALFV0xHDBSoQHPVFBqEcw9/AinD6FZOlhydipqyefhoSm1EByWyxpPXVI/kOs4BRBGwUc/69UCrfb0o2X5SnFc8vqMk11OyuyC1Ch5oZls1/r9AFkz+0upoYSmKX0QSVUbrDgO3r+RYh6jUOZoISGWAEIAAaGeeNO9Kri8HCuqIuo2bgIawfFCoezOI4k9iTHrho9wY0Xl0L/9qcptSRUQ4xi5k+eHicD97jIepV5bkcSg+rhy3uA5UguM4jIG04JUoPTiPS40AgssZNgoXhAQiI0Xm8GaOp0kMnsYo4/bFIDxNPk9p5jLArLgPpQXYYqfh7KkJ4IcgNUlveQNA1NjMF8wTahmdiB0K3UaK3Sg9BQJvp1VNyOE04NhCCQgOeLZAdgmMdQaPA1cMm3UkPxOZpBnPAOoKOg0qRzPBA/AZ5Sr35d6gkCnhvcwilZ4q5hnO5zyi90Bx4Lk9YbtPZXHiJGQPCP7p+TBrfd5IrpCMMV2Jd6hrWURWU2Ca2dWQaAUCslg9rOLt+Jtbl8vYwZHNYri5lhcMomEznghZbBPbJTK4QLz3pMktP5akHcsP+o40B4wAkl1pi3DJ6mXyl82T7QloRDyfrG1EHDvaaKaMB9zpcTxkBfjizU0dAVTqnSP2QNooPJLhiLWltzAJGgRrCmVKJLd5XC7Xcn65kYUfnLSccUmgAzNXjurrMgMFwlBxQUpb6aKISLExwGjQBGsZxOehZ+Xy7Eh+njdGtH7L0MJfBRaSG+QGqyJvAjtvsuk4iwtCxDVmJ4YfQLg4IDsdGU8DByGV20SXPlA2xkTZqhibhCmdBV8+YJvh/0CWOMvFTj9MVYrM5wAfRAJgCTAKf11fXtFxfStMyuUKCY2/mMmYG3vXwagFqRO96qGNEfFyROrJJnSm7m8Pi5rm820F+2GHmLD2fVzp0+Dib33v5SZx6u7sNyA2Z1TbWBXJjiwCy0Nk1QQ4WvGX7alEXc/n6VowBdfJZahO2LbyaYWANWIqwNZgEGHAov/0hha5a4VwGAiBTN10GF4ESCMFR1DKTyyenLBssB5W5vH4sxoBm4I0Tgwn7IZDJjJYl3omd0fd2bNPbrMRtQ+SHNRipY7eBmYaNye35YGLKKLrB0hvP1xIE3oeA4CQC4g1ql3uxxI5+hFqOM1mqdXxqTS55jkzkDQqFn86Wsixh+EOGNksStEl915Mf8swr3aGMt6CqEu469c0VTapuVjtYf9KO8z8l4LDaz1DQHwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;已实现的组件列表&quot;
+        title=&quot;&quot;
+        src=&quot;/static/3cb20012e661a75226994c1b9f4e173c/07a90/2.png&quot;
+        srcset=&quot;/static/3cb20012e661a75226994c1b9f4e173c/135ae/2.png 300w,
+/static/3cb20012e661a75226994c1b9f4e173c/07a90/2.png 414w&quot;
+        sizes=&quot;(max-width: 414px) 100vw, 414px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;已实现的组件列表&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;下面我对一些组件进行简单说明。&lt;/p&gt;
+&lt;h3 id=&quot;pl-media&quot;&gt;&lt;a href=&quot;#pl-media&quot; aria-label=&quot;pl media permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;pl-media&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;pl-media&lt;/code&gt; 是自定义的一个组件，用于监听页面的响应式，从而控制展示样式。其核心代码抽离为了一个项目：&lt;a href=&quot;https://github.com/blackcater/vue-media-query&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;vue-media-query&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&quot;pl-loader&quot;&gt;&lt;a href=&quot;#pl-loader&quot; aria-label=&quot;pl loader permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;pl-loader&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;pl-loader&lt;/code&gt; 是实现区域内容加载。核心代码来源于开源项目：&lt;a href=&quot;https://github.com/egoist/vue-content-loader&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;vue-content-loader&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;pl-form&quot;&gt;&lt;a href=&quot;#pl-form&quot; aria-label=&quot;pl form permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;pl-form&lt;/h3&gt;
+&lt;p&gt;表单是运营后台开发中最常用的组件之一，&lt;code class=&quot;language-text&quot;&gt;pl-form&lt;/code&gt;是所有自定义组件中的核心组件之一，许多组件都是在&lt;code class=&quot;language-text&quot;&gt;pl-form&lt;/code&gt;基础之上封装而成，或者与&lt;code class=&quot;language-text&quot;&gt;pl-form&lt;/code&gt;有关联。&lt;/p&gt;
+&lt;p&gt;iview 在实现表单数据收集，十分的复杂。提升表单收集效率，我们在&lt;code class=&quot;language-text&quot;&gt;&amp;lt;Form&amp;gt;&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;&amp;lt;FormItem&amp;gt;&lt;/code&gt;之上封装了一层。只需要简单的配置，就会自动的渲染出一个表单。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;&amp;lt;!-- template --&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;pl-form&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;:fields&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;fields&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;:fetch&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;login&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;pl-form&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// javascript&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Emitter &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Emitter&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Input &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;iview&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; MyOwnPassword &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  props&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    value&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; String&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  mixins&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Emitter&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;token function&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Input
+        value&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;this&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$attrs&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        on&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;on&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;change&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_onChange&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  methods&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;_onChange&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;$emit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;input&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; val&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;$emit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;on-change&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; val&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;dispatch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;FormItem&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;on-form-change&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; val&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      fields&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;username&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+          type&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Input&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+          label&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;用户名&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+          props&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; placeholder&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;请输入用户名&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+          rules&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; required&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; message&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;用户名不能为空&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          name&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;password&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+          label&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;密码&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+          component&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; MyOwnPassword&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+          props&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; placeholder&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;请输入用户名&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+          rules&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; required&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; message&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;用户名不能为空&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  methods&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// 登录请求&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// data 为由 pl-form 收集到的数据&lt;/span&gt;
+
+      &lt;span class=&quot;token comment&quot;&gt;// $http 为 vue-resource 实例，你也可以使用其他请求库&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$http
+        &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;/oauth2&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$Message&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;success&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;登录成功&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;$Message&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;登录失败&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上面就是&lt;code class=&quot;language-text&quot;&gt;pl-form&lt;/code&gt;的简单使用示例。既支持 iview 原生实现的组件，通过&lt;code class=&quot;language-text&quot;&gt;type&lt;/code&gt;指定；也可以支持自定义表单组件，通过&lt;code class=&quot;language-text&quot;&gt;component&lt;/code&gt;指定。&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 70.703125%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAABYlAAAWJQFJUiTwAAABU0lEQVQ4y41T2W7EMAjM/39Vf6J961ulXtp74wNsKJDgdbLpapFQsI0HM0OGWolrqZxz5iJfIjLPGRgRWU3XtVbbK6W0HMTCGcDOPGeoEqSUxLNd1gJyypfL1QAMUBwBOcQ451TztendwQDmhVe2arRc+wtoY1+9AYJU3u0P9nxvb3pTZ0RdSItvHxug8hZjWvClHmSv+Iu0ZTmPQk0PAEIJACx4bi2v2zqPma8ROBfhGIlBOgghWifOoYJpEY1VLPWBTJTcCG+89PHW+h+OBw+0bW3fq3UErr73Rr3K2oKPzJpsdgXdnwFMQuz3z28TxW0a8in5mXZvLataAjaOwUie/hgR4HziHEaVkilFJhXrAfBtbGzixauOABqoAtbjnvG4Y0JggmSA65ncnEPJ5Jd35NdPmaeKy6TV5UdqN0ASwLevwh8HAaMy80+b3N2JtvHCP2N+VFoicaNVAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;pl-form 示例一&quot;
+        title=&quot;&quot;
+        src=&quot;/static/24216b580e637c113678ce538ef456de/6ff5e/3.png&quot;
+        srcset=&quot;/static/24216b580e637c113678ce538ef456de/135ae/3.png 300w,
+/static/24216b580e637c113678ce538ef456de/34e8a/3.png 600w,
+/static/24216b580e637c113678ce538ef456de/6ff5e/3.png 1200w,
+/static/24216b580e637c113678ce538ef456de/79a4a/3.png 1800w,
+/static/24216b580e637c113678ce538ef456de/12f40/3.png 2048w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;pl-form 示例一&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1082px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 73.75231053604435%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAABYlAAAWJQFJUiTwAAABnUlEQVQ4y51S7U7CMBTllXxF//I1X8JnUH/4w6iRhG0kEJCREBRFPhxR6WjXrj3edoAfiTJtdnJvu/b0ntNb8v0QV9c3aPoBur0eoihCv99H38YioL1RNEC73UalUkHpcTJDNBhidPcArTX+O5SU8DwPJTtJM1ogLk5JwiXWQoHLrBjoTKoMWLJGrVZDaZwAnTHDYBzj9j5Gd7TA4OEF0zeNOQPBbOJPMFgQx3LFc0Jb4WL5ijfG6SaNVGoIgssLwqpbc456vZ4TxvESjNE1MPR9hTH6d2x8F4Lnj2InK8aglHKQZO5HrtxD7UNOKD4qnM7mSMjUlMg4Fy6KNHW51qYQISfJnrchFCJFlmW7DdvcGFO4QktYLm8kTyZTrFYMKVVlzU3W3Ek3zsPf8ZmwWq3mhPbHNhZBRjaoLI+fPdw1tpW4Jd03vm/bzi3hrg+tPEtaBEZnGD5L3IwE7mI6p6TrBkadspP813F4rnFwRJ5dUnmS4WkWu8uc5E6ngyAIEIbhXgSEVivEyYWP49Mmzi59tMLArTcaDXrlMt4B5aNzyk2I9eQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;pl-form 示例二&quot;
+        title=&quot;&quot;
+        src=&quot;/static/5a8a822a01c88a62630a8e8daac32016/6021c/4.png&quot;
+        srcset=&quot;/static/5a8a822a01c88a62630a8e8daac32016/135ae/4.png 300w,
+/static/5a8a822a01c88a62630a8e8daac32016/34e8a/4.png 600w,
+/static/5a8a822a01c88a62630a8e8daac32016/6021c/4.png 1082w&quot;
+        sizes=&quot;(max-width: 1082px) 100vw, 1082px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;pl-form 示例二&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1200px;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 63.04558680892337%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAABqklEQVQ4y4WT224UMQyG5/3fhRfgnlskuKm4QK0qUKGUzszm6Bzmx7+zszuLKohkJY7tL7aTTFkErXWUWlGKSm2oKiLlZs/0cvDRmHYWrl3uyKVhCt6Do56De+8mKWcDc59BKWU7YOhNIzYcR+kwv6mUYgDOdNwBhN/oddeb+W/bdiM8wIBZM6EDS9oDaMhZrsA+9HrO8C0gxYBeS7YSU74p+9hD6sM2Dn0LdgHSofWh7P2jcV8f9eHb/5Ohc1Z/ldF0ZsZsYkqW3a7/Pf6RYcW7z4KPj1GvSfT03dgumY2mX0hXOYP3wewnLh7njjlqoAUDnSDO/TqPLA68A4x2to3vc0q8PUkQve2YBCGmcUHaApabtXSRse9DxHryJsvq4HzA79fVYmsRfdgVE51PzpszQcuyYnERd08eLlU8PKstVyTCFEL7rOI0JgQ9PAZ8e4m4/5WsTdPxBnkpMQQsqeH9V8GLtuHTj4rXpN9g61YesyKQT0g0I2wVd88dH+6ruihwvLHxgAlMWqLPTUEFJ/2fD3OFE/tXBmQ187yaP4G9FXxfGr78HD/pDz5i/B+mkj9qAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;&lt;/span&gt;
+    &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;box-shadow:inset 0px 0px 0px 400px transparent;&quot;
+        alt=&quot;pl-form 示例三&quot;
+        title=&quot;&quot;
+        src=&quot;/static/cd05d4a302a2321f4cd080fd7d9422c1/6ff5e/5.png&quot;
+        srcset=&quot;/static/cd05d4a302a2321f4cd080fd7d9422c1/135ae/5.png 300w,
+/static/cd05d4a302a2321f4cd080fd7d9422c1/34e8a/5.png 600w,
+/static/cd05d4a302a2321f4cd080fd7d9422c1/6ff5e/5.png 1200w,
+/static/cd05d4a302a2321f4cd080fd7d9422c1/79a4a/5.png 1800w,
+/static/cd05d4a302a2321f4cd080fd7d9422c1/83960/5.png 2062w&quot;
+        sizes=&quot;(max-width: 1200px) 100vw, 1200px&quot;
+      /&gt;
+  &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;pl-form 示例三&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;上面示例的实现，都是基于&lt;code class=&quot;language-text&quot;&gt;pl-form&lt;/code&gt;实现的。&lt;/p&gt;
+&lt;h2 id=&quot;总结&quot;&gt;&lt;a href=&quot;#%E6%80%BB%E7%BB%93&quot; aria-label=&quot;总结 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;总结&lt;/h2&gt;
+&lt;p&gt;iview 很不错，但是实际使用中问题也较多。毕竟该项目不是大企业专门团队在维护。虽然坑多，但不影响其成为一个不错的选择。&lt;/p&gt;
+&lt;p&gt;你在怀疑我这句话？不妨看看官方的例子&lt;a href=&quot;https://github.com/iview/iview-admin&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;iview-admin&lt;/a&gt;。&lt;/p&gt;</content:encoded></item></channel></rss>
