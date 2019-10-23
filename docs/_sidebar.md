@@ -1,48 +1,76 @@
+- 浏览器
+    - [*IE6/7/8/9/10/11 (Trident) / Edge (EdgeHTML)]()
+    - [*Firefox (Gecko)]()
+    - [*Chrome/Chromium (Blink)]()
+    - [*Safari (WebKit)]()
+    - [*Opera (Blink)]()
+- 编程语言
+    - [*JavaScript/Node.js](packages/wxc-minibar/)
+    - [*CoffeeScript.js](packages/wxc-minibar/)
+    - [*TypeScript.js](packages/wxc-minibar/)
+    - [*Dart.js](packages/wxc-minibar/)
 - 切页面
     - [HTML/HTML5](cutpage/html/)
-
-- 编程语言
-    - [wxc-minibar](packages/wxc-minibar/)
-
-- 计算机知识储备
-    - [wxc-checkbox](packages/wxc-checkbox/)
-
-- 调试工具
-    - [wxc-checkbox](packages/wxc-checkbox/)
-
+    - [Css/Css3](cutpage/css/)
+    - [Sass/LESS/Stylus/postCSS](cutpage/html/)
+    - [PhotoShop/Paint.net/Fireworks/GIMP/Sketch](cutpage/css/)
 - 开发工具
-    - [wxc-button](packages/wxc-button/)
-
-- 浏览器兼容性
-    - [wxc-minibar](packages/wxc-minibar/)
-
+    - [编辑器和IDE](packages/wxc-button/)
+    - [调试工具](packages/wxc-button/)
+    - [版本管理](packages/wxc-button/)
+- 代码质量
+    - [CodeingStyle](packages/wxc-button/)
+    - [单元测试](packages/wxc-button/)
+    - [自动化测试](packages/wxc-button/)
 - 前端框架/库
-    - [wxc-checkbox](packages/wxc-checkbox/)
-
-- 开发流程/部署
-    - [wxc-checkbox](packages/wxc-checkbox/)
-    
+    - [React](packages/wxc-checkbox/)
+    - [Vue](packages/wxc-checkbox/)
 - 前端标准/规范
     - [wxc-city](packages/wxc-city/)
-
 - 性能
     - [wxc-dialog](packages/wxc-dialog/)
-
-- 编程知识储备
-   - [wxc-lottery-rain](packages/wxc-lottery-rain/)
-
-- 软技能
-   - [utils](packages/utils/)
-
-- 安全
+- SEO
     - [wxc-dialog](packages/wxc-dialog/)
-
-- Web服务
-   - [utils](packages/utils/) 
-
-- 移动终端
-   - [wxc-lottery-rain](packages/wxc-lottery-rain/)
-
+- 编程知识储备
+    - [wxc-lottery-rain](packages/wxc-lottery-rain/)
+- 部署流程
+    - [wxc-lottery-rain](packages/wxc-lottery-rain/)
+- 代码组织
+    - [wxc-lottery-rain](packages/wxc-lottery-rain/)
+- 安全
+    - [wxc-lottery-rain](packages/wxc-lottery-rain/)
+- 移动Web
+    - [wxc-lottery-rain](packages/wxc-lottery-rain/)
 - 前沿技术社区/会议
-   - [utils](packages/utils/)
-
+    - [D2/WebRebuild]()
+    - [NodeParty/W3CTech/HTML5梦工厂]()
+    - [JSConf/沪JS(JSConf.cn)]()
+    - [QCon/Velocity/SDCC]()
+    - [JSConf/NodeConf]()
+    - [D2/WebRebuild]()
+    - [D2/WebRebuild]()
+    - [D2/WebRebuild]()
+    - [D2/WebRebuild]()
+    - [D2/WebRebuild]()
+    - [D2/WebRebuild]()
+    - [D2/WebRebuild]()
+    - [D2/WebRebuild]()
+- 计算机知识储备
+    - [编译原理](packages/wxc-checkbox/)
+    - [计算机网络](packages/wxc-checkbox/)
+    - [操作系统](packages/wxc-checkbox/)
+    - [算法原理](packages/wxc-checkbox/)
+    - [软件工程/软件测试原理](packages/wxc-checkbox/)
+    - [Unicode](packages/wxc-checkbox/)
+- 软技能
+    - [知识管理/总结分享](packages/utils/)
+    - [沟通技巧/团队协作](packages/utils/)
+    - [需求管理/PM](packages/utils/)
+    - [交互设计/可用性/可访问性知识](packages/utils/)
+- 可视化
+    - [svg/Canvas/VML](packages/wxc-dialog/)
+    - [SVG: D3/Raphaël/Snap.svg/DataV]()
+    - [Canvas: CreateJS/KineticJS]()
+    - [WebGL/Three.JS]()
+- 网页服务器
+    - [Nginx]()
