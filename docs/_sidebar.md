@@ -1,15 +1,10 @@
-- 浏览器
-    - [*IE6/7/8/9/10/11 (Trident) / Edge (EdgeHTML)]()
-    - [*Firefox (Gecko)]()
-    - [*Chrome/Chromium (Blink)]()
-    - [*Safari (WebKit)]()
-    - [*Opera (Blink)]()
 - 编程语言
-    - [*JavaScript/Node.js](packages/wxc-minibar/)
-    - [*CoffeeScript.js](packages/wxc-minibar/)
-    - [*TypeScript.js](packages/wxc-minibar/)
-    - [*Dart.js](packages/wxc-minibar/)
-- 切页面
+    - [JavaScript/Node.js](lang/js/)
+    - [*CoffeeScript.js](lang/cs/)
+    - [*TypeScript.js](lang/ts/)
+    - [*GraphQL.js](lang/graphql/)
+    - [*Dart.js](lang/dart/)
+- 页面相关
     - [*HTML/HTML5](cutpage/html/)
     - [*Css/Css3](cutpage/css/)
     - [*Sass/LESS/Stylus/postCSS](cutpage/html/)
@@ -25,6 +20,13 @@
 - 前端框架/库
     - [*React](packages/wxc-checkbox/)
     - [*Vue](packages/wxc-checkbox/)
+    - [*Rx.js](packages/wxc-checkbox/)
+- 浏览器
+    - [*IE6/7/8/9/10/11 (Trident) / Edge (EdgeHTML)]()
+    - [*Firefox (Gecko)]()
+    - [*Chrome/Chromium (Blink)]()
+    - [*Safari (WebKit)]()
+    - [*Opera (Blink)]()
 - 前端标准/规范
     - [*HTTP/1.1: RFCs 7230-7235](packages/wxc-city/)
     - [*HTTP/2](packages/wxc-city/)
