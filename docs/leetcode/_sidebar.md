@@ -1,0 +1,8 @@
+- 打击自己盲目自信的最好方法。
+- 常用数据结构
+  - [数组、字符串](leetcode/array&string)
+  - [链表](leetcode/linkedList)
+  - [栈](leetcode/stack)
+  - [队列](prototype)
+  - [双端队列](prototype)
+  - [树](prototype)

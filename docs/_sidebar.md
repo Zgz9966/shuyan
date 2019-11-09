@@ -1,18 +1,16 @@
-- 编程语言
+- Lang
     - [JavaScript/Node.js](lang/js/)
-    - [*CoffeeScript.js](lang/cs/)
-    - [*TypeScript.js](lang/ts/)
-    - [*GraphQL.js](lang/graphql/)
-    - [*Dart.js](lang/dart/)
-- 页面相关
-    - [*HTML/HTML5](cutpage/html/)
-    - [*Css/Css3](cutpage/css/)
-    - [*Sass/LESS/Stylus/postCSS](cutpage/html/)
-    - [*PhotoShop/Paint.net/Fireworks/GIMP/Sketch](cutpage/css/)
-- 开发工具
-    - [*编辑器和IDE](packages/wxc-button/)
-    - [*调试工具](packages/wxc-button/)
-    - [*版本管理](packages/wxc-button/)
+    - [* TypeScript.js](lang/ts/)
+    - [* GraphQL](lang/graphql/)
+    - [* Dart.js](lang/dart/)
+- 数据结构与算法
+    - [数据结构](struct/)
+    - [算法](leetcode/)
+- 标记语言和层叠样式表/页面相关
+    - [* HTML/HTML5](cutpage/html/)
+    - [* Css/Css3](cutpage/css/)
+    - [* Sass/LESS/Stylus/postCSS](cutpage/html/)
+    - [* PhotoShop/Paint.net/Fireworks/GIMP/Sketch](cutpage/css/)
 - 代码质量
     - [*CodeingStyle](packages/wxc-button/)
     - [*单元测试](packages/wxc-button/)
@@ -21,22 +19,6 @@
     - [*React](packages/wxc-checkbox/)
     - [*Vue](packages/wxc-checkbox/)
     - [*Rx.js](packages/wxc-checkbox/)
-- 浏览器
-    - [*IE6/7/8/9/10/11 (Trident) / Edge (EdgeHTML)]()
-    - [*Firefox (Gecko)]()
-    - [*Chrome/Chromium (Blink)]()
-    - [*Safari (WebKit)]()
-    - [*Opera (Blink)]()
-- 前端标准/规范
-    - [*HTTP/1.1: RFCs 7230-7235](packages/wxc-city/)
-    - [*HTTP/2](packages/wxc-city/)
-    - [*ECMAScript3/5](packages/wxc-city/)
-    - [*ECMAScript6](packages/wxc-city/)
-    - [*W3C: DOM/BOM/XHTML/XML/JSON/JSONP/...](packages/wxc-city/)
-    - [*CommonJS Modules/AMD](packages/wxc-city/)
-    - [*HTML5/CSS3](packages/wxc-city/)
-    - [*Semantic Web](packages/wxc-city/)
-    - [*Web Accessibility](packages/wxc-city/)
 - 性能
     - [*JSPerf](packages/wxc-dialog/)
     - [*YSlow 35 rules](packages/wxc-dialog/)
@@ -44,16 +26,34 @@
     - [*HTTPWatch](packages/wxc-dialog/)
     - [*DynaTrace's Ajax](packages/wxc-dialog/)
     - [*高性能JavaScript](packages/wxc-dialog/)
+- 开发工具
+    - [*编辑器和IDE](packages/wxc-button/)
+    - [*调试工具](packages/wxc-button/)
+    - [*版本管理](packages/wxc-button/)
+- 浏览器
+    - [* IE6/7/8/9/10/11 (Trident) / Edge (EdgeHTML)]()
+    - [* Firefox (Gecko)]()
+    - [* Chrome/Chromium (Blink)]()
+    - [* Safari (WebKit)]()
+    - [* Opera (Blink)]()
+- 前端标准/规范
+    - [* HTTP/1.1: RFCs 7230-7235](packages/wxc-city/)
+    - [* HTTP/2](packages/wxc-city/)
+    - [* ECMAScript3/5](packages/wxc-city/)
+    - [* ECMAScript6](packages/wxc-city/)
+    - [* W3C: DOM/BOM/XHTML/XML/JSON/JSONP/...](packages/wxc-city/)
+    - [* CommonJS Modules/AMD](packages/wxc-city/)
+    - [* HTML5/CSS3](packages/wxc-city/)
+    - [* Semantic Web](packages/wxc-city/)
+    - [* Web Accessibility](packages/wxc-city/)
 - [SEO]()
 - 编程知识储备
-    - [*数据结构]()
     - [*OOP/AOP]()
-    - [*原型链/作用域链]()
-    - [*闭包]()
     - [*编程范型]()
     - [*设计模式]()
     - [*Javascript Tips]()
 - 部署流程
+    - [*Webpack]()
     - [*压缩合并]()
     - [*文档输出]()
     - [*项目构建工具]()
