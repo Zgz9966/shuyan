@@ -7,8 +7,7 @@
 - 手写系列
   - [手写call，apply](lang/js/call&apply)
   - [手写bind](lang/js/bind)
-  - [手写debounce](lang/js/debounce)
-  - [手写throttle](lang/js/throttle)
+  - [手写debounce，throttle](lang/js/debounce)
 - ES6
   - [*let和const]()
   - [*模板字符串]()
