@@ -1,0 +1,84 @@
+# Project Information
+site_name: chanceZyw
+site_description: chanceZyw's blog
+site_author: chanceZyw
+site_url: https://chancezyw.github.io/shuyan/
+
+# Repository
+repo_name: 'shuyan/shuyan'
+repo_url: 'https://github.com/chancezyw/shuyan'
+# edit_uri: 'blob/master/docs/'
+
+# Copyright
+copyright: 'Copyright &copy; 2019 - 2020 chanceZyw'
+
+# Contents
+nav:
+  - Introduction:
+    - Getting Started: index.md 
+    - Learning Resources: introduction/resources.md
+    - Markdown Norm: introduction/markdown-norm.md
+  # - JavaScript:
+  #   - Getting Started: index.md
+  #   - Core Concept: index.md
+  #   - FP: index.md
+  #   - Code Quality: index.md
+  #   - Bom&Dom&Event: index.md
+  #   - NodeJs: index.md
+  #   - Addition Concept: index.md
+
+# Theme
+theme:
+  name: 'material'
+  language: 'zh'
+  palette:
+    primary: 'white'
+    accent: 'red'
+  logo:
+    icon: 'school'
+  feature:
+    tabs: true
+  font:
+    text: 'Noto Sans'
+    code: 'Source Code Pro'
+
+# Customization
+extra:
+  search:
+    language: 'jp'
+  disqus: 'chancezyw'
+  copyright: 'CC BY-NC-SA 4.0'
+
+extra_javascript:
+  - 'https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js'
+  - '_static/js/extra.js'
+  - 'https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'
+
+extra_css:
+  - '_static/css/extra.css'
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - def_list
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
