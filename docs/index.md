@@ -1,6 +1,6 @@
 # shuyan
 
-<!-- [![Requirements Status](https://requires.io/github/chanceZyw/shuyan/requirements.svg?branch=master)](https://requires.io/github/chanceZyw/shuyan/requirements/?branch=master) -->
+[![Requirements Status](https://requires.io/github/chanceZyw/shuyan/requirements.svg?branch=master)](https://requires.io/github/chanceZyw/shuyan/requirements/?branch=master)
 [![Slack](https://img.shields.io/badge/slack-join%20chat-brightgreen.svg)](https://app.slack.com/client/TR0U3PTFB/apps?cdn_fallback=1)
 
 欢迎来到 **shuyan**。
@@ -52,7 +52,7 @@ blog 目前采用 [mkdocs](https://github.com/mkdocs/mkdocs) 部署在 [https://
 - 实践比什么都要管用
 - 保持对技术的好奇与渴望并坚持下去
 
-## Material color palette 颜色主题
+## Material color palette 更换颜色主题
 
 > blog 主题 copy 自 [CTF-wiki](https://github.com/ctf-wiki/ctf-wiki)
 

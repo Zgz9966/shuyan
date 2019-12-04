@@ -1,11 +1,11 @@
 # shuyan
 
-<!-- [![Requirements Status](https://requires.io/github/chanceZyw/shuyan/requirements.svg?branch=master)](https://requires.io/github/chanceZyw/shuyan/requirements/?branch=master) -->
+[![Requirements Status](https://requires.io/github/chanceZyw/shuyan/requirements.svg?branch=master)](https://requires.io/github/chanceZyw/shuyan/requirements/?branch=master)
 [![Slack](https://img.shields.io/badge/slack-join%20chat-brightgreen.svg)](https://app.slack.com/client/TR0U3PTFB/apps?cdn_fallback=1)
 
-欢迎来到 **shuyan**。
+欢迎来到 **shuyan**。在线访问地址 [zyw.name](www.zyw.name)
  
-**shuyan**（chancezyw's blog）是较为全面的前端技术栈整理。
+**shuyan**（chancezyw's blog）是较为全面(我认为)的前端技术栈整理。
 
 **shuyan** 涉及较多领域。我试图整理一个系统的入口，判断自己缺失的技术栈，并且专注核心，主要在于理解核心而不是成为 api 调用师。
 
