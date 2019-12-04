@@ -52,6 +52,3 @@ blog 目前采用 [mkdocs](https://github.com/mkdocs/mkdocs) 部署在 [https://
 - 实践比什么都要管用
 - 保持对技术的好奇与渴望并坚持下去
 
-## 主题
-
-> blog 主题 copy 自 [CTF-wiki](https://github.com/ctf-wiki/ctf-wiki)

@@ -3,8 +3,10 @@
 [![Requirements Status](https://requires.io/github/chanceZyw/shuyan/requirements.svg?branch=master)](https://requires.io/github/chanceZyw/shuyan/requirements/?branch=master)
 [![Slack](https://img.shields.io/badge/slack-join%20chat-brightgreen.svg)](https://app.slack.com/client/TR0U3PTFB/apps?cdn_fallback=1)
 
+![](_static/imgs/introduction.jpg)
+
 欢迎来到 **shuyan**。
- 
+
 **shuyan**（chancezyw's blog）是较为全面的前端技术栈整理。
 
 **shuyan** 涉及较多领域。我试图整理一个系统的入口，判断自己缺失的技术栈，并且专注核心，主要在于理解核心而不是成为 api 调用师。
@@ -53,8 +55,6 @@ blog 目前采用 [mkdocs](https://github.com/mkdocs/mkdocs) 部署在 [https://
 - 保持对技术的好奇与渴望并坚持下去
 
 ## Material color palette 更换颜色主题
-
-> blog 主题 copy 自 [CTF-wiki](https://github.com/ctf-wiki/ctf-wiki)
 
 ### Primary colors 主色
 

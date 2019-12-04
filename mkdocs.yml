@@ -37,37 +37,40 @@ theme:
   name: 'material'
   language: 'zh'
   palette:
-    primary: 'deep purple'
-    accent: 'deep purple'
+    primary: 'Red'
+    accent: 'deep orange'
   logo:
-    icon: 'school'
+    icon: 'polymer'
   feature:
     tabs: true
   font:
-    text: 'Noto Sans'
-    code: 'Source Code Pro'
+    text: 'Gloria Hallelujah'
+    code: 'Inconsolata'
 
 # Customization
 extra:
   search:
-    language: 'jp'
+    language: 'ja, en'
   disqus: 'chancezyw'
-  copyright: 'CC BY-NC-SA 4.0'
+  copyright: 'chancezyw 4.0'
 
 extra_javascript:
   - 'https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js'
   - '_static/js/extra.js'
+  - '_static/js/highlight.pack.js'
   - 'https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'
 
 extra_css:
   - '_static/css/extra.css'
+  - '_static/css/github-gist.css'
 
 # Extensions
 markdown_extensions:
   - markdown.extensions.attr_list
   - admonition
-  - codehilite:
-      guess_lang: false
+  # - codehilite:
+  #     guess_lang: false
+  #     linenums: false
   - def_list
   - footnotes
   - meta
