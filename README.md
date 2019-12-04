@@ -32,6 +32,8 @@
 
 blog 目前采用 [mkdocs](https://github.com/mkdocs/mkdocs) 部署在 [https://chancezyw.github.io/shuyan/](https://chancezyw.github.io/shuyan/)。
 
+> `mkdocs gh-deploy`可以将其直接提交到 gh-pages 分支
+
 ## How to practice？
 
 首先，可以通过浏览网上资料来学习一些基本的语法。
