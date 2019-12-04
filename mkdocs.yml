@@ -18,22 +18,27 @@ nav:
     - Getting Started: index.md 
     - Learning Resources: introduction/resources.md
     - Markdown Norm: introduction/markdown-norm.md
-  # - JavaScript:
-  #   - Getting Started: index.md
-  #   - Core Concept: index.md
-  #   - FP: index.md
-  #   - Code Quality: index.md
-  #   - Bom&Dom&Event: index.md
-  #   - NodeJs: index.md
-  #   - Addition Concept: index.md
+  - JavaScript:
+    - Getting Started: javascript/introduction.md
+    - Core Concept: 
+      - Execute Context: javascript/core/execute-context.md
+      - Promise: javascript/core/promise.md
+    - Bom&Dom&Event: javascript/introduction.md
+    - Code Quality: javascript/introduction.md
+    - FP: 
+      - Why FP: javascript/fp/why-fp.md
+      - Nature Function: javascript/fp/nature-function.md
+      - Manage Function Inputs: javascript/fp/manage-function-inputs.md
+    - NodeJs: javascript/introduction.md
+    - Addition Concept: javascript/introduction.md
 
 # Theme
 theme:
   name: 'material'
   language: 'zh'
   palette:
-    primary: 'white'
-    accent: 'red'
+    primary: 'deep purple'
+    accent: 'deep purple'
   logo:
     icon: 'school'
   feature:
@@ -59,6 +64,7 @@ extra_css:
 
 # Extensions
 markdown_extensions:
+  - markdown.extensions.attr_list
   - admonition
   - codehilite:
       guess_lang: false
@@ -71,6 +77,8 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
+  - pymdownx.betterem:
+      smart_enable: all
   - pymdownx.emoji:
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
   - pymdownx.inlinehilite
