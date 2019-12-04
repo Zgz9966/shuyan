@@ -13,6 +13,8 @@
         <meta name="description" content="chanceZyw's blog">
       
       
+        <link rel="canonical" href="https://chancezyw.github.io/shuyan/javascript/core/promise/">
+      
       
         <meta name="author" content="chanceZyw">
       
@@ -35,18 +37,18 @@
       
         <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
       
-      <link rel="shortcut icon" href="/shuyan/assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.1">
     
     
       
-        <title>chanceZyw</title>
+        <title>Promise - chanceZyw</title>
       
     
     
-      <link rel="stylesheet" href="/shuyan/assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
       
-        <link rel="stylesheet" href="/shuyan/assets/stylesheets/application-palette.a8b3c06d.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.a8b3c06d.css">
       
       
         
@@ -55,7 +57,7 @@
       
     
     
-      <script src="/shuyan/assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
@@ -64,10 +66,10 @@
         <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Source Code Pro","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="/shuyan/assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
     
     
-      <link rel="stylesheet" href="/shuyan/_static/css/extra.css">
+      <link rel="stylesheet" href="../../../_static/css/extra.css">
     
     
       
@@ -113,7 +115,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                
+                Promise
               
             </span>
           
@@ -181,7 +183,9 @@
       
         
 
-<nav class="md-tabs" data-md-component="tabs">
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
@@ -190,7 +194,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="/shuyan/." class="md-tabs__link">
+        <a href="../../.." class="md-tabs__link">
           Introduction
         </a>
       
@@ -203,7 +207,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="/shuyan/javascript/introduction/" class="md-tabs__link">
+        <a href="../../introduction/" class="md-tabs__link md-tabs__link--active">
           JavaScript
         </a>
       
@@ -279,7 +283,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/." title="Getting Started" class="md-nav__link">
+    <a href="../../.." title="Getting Started" class="md-nav__link">
       Getting Started
     </a>
   </li>
@@ -291,7 +295,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/introduction/resources/" title="Learning Resources" class="md-nav__link">
+    <a href="../../../introduction/resources/" title="Learning Resources" class="md-nav__link">
       Learning Resources
     </a>
   </li>
@@ -303,7 +307,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/introduction/markdown-norm/" title="Markdown Norm" class="md-nav__link">
+    <a href="../../../introduction/markdown-norm/" title="Markdown Norm" class="md-nav__link">
       Markdown Norm
     </a>
   </li>
@@ -318,10 +322,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       JavaScript
@@ -339,7 +345,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/javascript/introduction/" title="Getting Started" class="md-nav__link">
+    <a href="../../introduction/" title="Getting Started" class="md-nav__link">
       Getting Started
     </a>
   </li>
@@ -349,10 +355,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2" checked>
     
     <label class="md-nav__link" for="nav-2-2">
       Core Concept
@@ -370,7 +378,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/javascript/core/execute-context/" title="Execute Context" class="md-nav__link">
+    <a href="../execute-context/" title="Execute Context" class="md-nav__link">
       Execute Context
     </a>
   </li>
@@ -380,11 +388,18 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="/shuyan/javascript/core/promise/" title="Promise" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+    <a href="./" title="Promise" class="md-nav__link md-nav__link--active">
       Promise
     </a>
+    
   </li>
 
         
@@ -399,7 +414,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/javascript/introduction/" title="Bom&Dom&Event" class="md-nav__link">
+    <a href="../../introduction/" title="Bom&Dom&Event" class="md-nav__link">
       Bom&Dom&Event
     </a>
   </li>
@@ -411,7 +426,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/javascript/introduction/" title="Code Quality" class="md-nav__link">
+    <a href="../../introduction/" title="Code Quality" class="md-nav__link">
       Code Quality
     </a>
   </li>
@@ -442,7 +457,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/javascript/fp/why-fp/" title="Why FP" class="md-nav__link">
+    <a href="../../fp/why-fp/" title="Why FP" class="md-nav__link">
       Why FP
     </a>
   </li>
@@ -454,7 +469,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/javascript/fp/nature-function/" title="Nature Function" class="md-nav__link">
+    <a href="../../fp/nature-function/" title="Nature Function" class="md-nav__link">
       Nature Function
     </a>
   </li>
@@ -466,7 +481,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/javascript/fp/manage-function-inputs/" title="Manage Function Inputs" class="md-nav__link">
+    <a href="../../fp/manage-function-inputs/" title="Manage Function Inputs" class="md-nav__link">
       Manage Function Inputs
     </a>
   </li>
@@ -483,7 +498,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/javascript/introduction/" title="NodeJs" class="md-nav__link">
+    <a href="../../introduction/" title="NodeJs" class="md-nav__link">
       NodeJs
     </a>
   </li>
@@ -495,7 +510,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/shuyan/javascript/introduction/" title="Addition Concept" class="md-nav__link">
+    <a href="../../introduction/" title="Addition Concept" class="md-nav__link">
       Addition Concept
     </a>
   </li>
@@ -517,8 +532,17 @@
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
-  <h1>404 - Not found</h1>
-
+                
+                  <a href="https://github.com/chancezyw/shuyan/edit/master/docs/javascript/core/promise.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Promise</h1>
+                
+                
+                
+                  
+                
+              
               
                 
 
@@ -527,9 +551,9 @@
   <div id="disqus_thread"></div>
   <script>
     var disqus_config = function () {
-      this.page.url = "";
+      this.page.url = "https://chancezyw.github.io/shuyan/javascript/core/promise/";
       this.page.identifier =
-        "";
+        "javascript/core/promise/";
     };
     (function() {
       var d = document, s = d.createElement("script");
@@ -547,6 +571,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../execute-context/" title="Execute Context" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Execute Context
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../introduction/" title="Bom&Dom&Event" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                Bom&Dom&Event
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -569,12 +628,12 @@
       
     </div>
     
-      <script src="/shuyan/assets/javascripts/application.8e03edeb.js"></script>
+      <script src="../../../assets/javascripts/application.8e03edeb.js"></script>
       
         
         
           
-          <script src="/shuyan/assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
           
             
               
@@ -584,11 +643,11 @@
           
         
       
-      <script>app.initialize({version:"1.0.4",url:{base:"/shuyan/"}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
       
         <script src="https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js"></script>
       
-        <script src="/shuyan/_static/js/extra.js"></script>
+        <script src="../../../_static/js/extra.js"></script>
       
         <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       

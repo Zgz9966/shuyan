@@ -1,0 +1,1036 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="chanceZyw's blog">
+      
+      
+        <link rel="canonical" href="https://chancezyw.github.io/shuyan/javascript/fp/manage-function-inputs/">
+      
+      
+        <meta name="author" content="chanceZyw">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.1">
+    
+    
+      
+        <title>Manage Function Inputs - chanceZyw</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#7e57c2">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700|Source+Code+Pro&display=fallback">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Source Code Pro","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../_static/css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://chancezyw.github.io/shuyan/" title="chanceZyw" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              chanceZyw
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Manage Function Inputs
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/chancezyw/shuyan/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    shuyan/shuyan
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../.." class="md-tabs__link">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../introduction/" class="md-tabs__link md-tabs__link--active">
+          JavaScript
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://chancezyw.github.io/shuyan/" title="chanceZyw" class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </a>
+    chanceZyw
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/chancezyw/shuyan/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    shuyan/shuyan
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../introduction/resources/" title="Learning Resources" class="md-nav__link">
+      Learning Resources
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../introduction/markdown-norm/" title="Markdown Norm" class="md-nav__link">
+      Markdown Norm
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      JavaScript
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        JavaScript
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../introduction/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Core Concept
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Core Concept
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../core/execute-context/" title="Execute Context" class="md-nav__link">
+      Execute Context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../core/promise/" title="Promise" class="md-nav__link">
+      Promise
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../introduction/" title="Bom&Dom&Event" class="md-nav__link">
+      Bom&Dom&Event
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../introduction/" title="Code Quality" class="md-nav__link">
+      Code Quality
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5" checked>
+    
+    <label class="md-nav__link" for="nav-2-5">
+      FP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        FP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../why-fp/" title="Why FP" class="md-nav__link">
+      Why FP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../nature-function/" title="Nature Function" class="md-nav__link">
+      Nature Function
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Manage Function Inputs
+      </label>
+    
+    <a href="./" title="Manage Function Inputs" class="md-nav__link md-nav__link--active">
+      Manage Function Inputs
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    一元函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参数的解构和聚合
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    偏函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    柯里化
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    为什么使用柯里化和偏函数？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    更宽松的柯里化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    取消柯里化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    高级实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../introduction/" title="NodeJs" class="md-nav__link">
+      NodeJs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../introduction/" title="Addition Concept" class="md-nav__link">
+      Addition Concept
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    一元函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参数的解构和聚合
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    偏函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    柯里化
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    为什么使用柯里化和偏函数？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    更宽松的柯里化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    取消柯里化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    高级实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/chancezyw/shuyan/edit/master/docs/javascript/fp/manage-function-inputs.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Manage Function Inputs</h1>
+                
+                <h2 id="_1">一元函数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>给函数单一的参数</p>
+<p>这样做可以避免参数穿透，举个栗子</p>
+<div class="codehilite"><pre><span></span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">)</span>
+<span class="c1">// [1, NaN, NaN]</span>
+</pre></div>
+
+<p>我们可以写一个帮助函数来过滤多余的参数</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">unary</span> <span class="o">=</span> <span class="nx">fn</span> <span class="p">=&gt;</span> <span class="nx">arg</span> <span class="p">=&gt;</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span>
+
+<span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">unary</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">))</span>
+</pre></div>
+
+<p>甚至你还可以用的更花哨</p>
+<p>来看下面这个函数</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">identity</span> <span class="o">=</span> <span class="nx">v</span> <span class="p">=&gt;</span> <span class="nx">v</span><span class="p">;</span>
+</pre></div>
+
+<p>这个函数看起来就像人们口中的 shit</p>
+<p>但是只有脑子 shit 的开发者</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">words</span> <span class="o">=</span> <span class="s2">&quot;   Now is the time for all...  &quot;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span> <span class="sr">/\s|\b/</span> <span class="p">)</span>
+
+<span class="nx">words</span>
+<span class="c1">// [&quot;&quot;,&quot;Now&quot;,&quot;is&quot;,&quot;the&quot;,&quot;time&quot;,&quot;for&quot;,&quot;all&quot;,&quot;...&quot;,&quot;&quot;]</span>
+
+<span class="nx">words</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span> <span class="nx">identity</span> <span class="p">)</span>
+<span class="c1">// [&quot;Now&quot;,&quot;is&quot;,&quot;the&quot;,&quot;time&quot;,&quot;for&quot;,&quot;all&quot;,&quot;...&quot;]</span>
+</pre></div>
+
+<p>还不过瘾？再看下面这个</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">output</span> <span class="o">=</span> <span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">formatFn</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">msg</span> <span class="o">=</span> <span class="nx">formatFn</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">upper</span> <span class="o">=</span> <span class="nx">txt</span> <span class="p">=&gt;</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span>
+
+<span class="nx">output</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">,</span> <span class="nx">upper</span><span class="p">)</span>     <span class="c1">// HELLO WORLD</span>
+<span class="nx">output</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>            <span class="c1">// Hello World</span>
+</pre></div>
+
+<p>一元函数还有别的方式，比如某些不能传递值参数但能传递函数的方法</p>
+<p>如 js 中的 Promise 的 then 方法</p>
+<div class="codehilite"><pre><span></span><span class="c1">// error</span>
+<span class="nx">promise1</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">p2</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">bar</span><span class="p">)</span>
+
+<span class="c1">// success</span>
+<span class="nx">promise1</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">p2</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">bar</span><span class="p">)</span>
+</pre></div>
+
+<p>我们可以写一个值转换函数</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">constant</span> <span class="o">=</span> <span class="nx">v</span> <span class="p">=&gt;</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">v</span>
+
+<span class="nx">promise1</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">constant</span><span class="p">(</span><span class="nx">v</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="nx">bar</span><span class="p">)</span>
+</pre></div>
+
+<h2 id="_2">参数的解构和聚合<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>某些时候，你会有两个不兼容的函数，在无法更改声明的情况下，如何一起使用他们呢？</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nx">bar</span> <span class="o">=</span> <span class="nx">fn</span> <span class="p">=&gt;</span> <span class="nx">fn</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+
+<span class="nx">bar</span><span class="p">(</span><span class="nx">foo</span><span class="p">)</span> <span class="c1">// error</span>
+
+<span class="kd">let</span> <span class="nx">spreadArgs</span> <span class="o">=</span> <span class="nx">fn</span> <span class="p">=&gt;</span> 
+    <span class="nx">argsArr</span> <span class="p">=&gt;</span> <span class="nx">fn</span><span class="p">(...</span><span class="nx">argsArr</span><span class="p">)</span>
+
+<span class="nx">bar</span><span class="p">(</span><span class="nx">spreadArgs</span><span class="p">(</span><span class="nx">foo</span><span class="p">))</span> <span class="c1">// 12</span>
+</pre></div>
+
+<p>考虑反向操作</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">gatherArgs</span> <span class="o">=</span> <span class="nx">fn</span> <span class="p">=&gt;</span> 
+    <span class="p">(...</span><span class="nx">argsArr</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">argsArr</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nx">combineFirstTwo</span> <span class="o">=</span> <span class="p">([</span> <span class="nx">v1</span><span class="p">,</span> <span class="nx">v2</span> <span class="p">])</span> <span class="p">=&gt;</span> <span class="nx">v1</span> <span class="o">+</span> <span class="nx">v2</span>
+
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">].</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">gatherArgs</span><span class="p">(</span><span class="nx">combineFirstTwo</span><span class="p">))</span>
+<span class="c1">// 15</span>
+</pre></div>
+
+<h2 id="_3">偏函数<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">partial</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,...</span><span class="nx">presetArgs</span><span class="p">)</span> <span class="p">=&gt;</span> 
+    <span class="p">(...</span><span class="nx">laterArgs</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">fn</span><span class="p">(...</span><span class="nx">presetArgs</span><span class="p">,</span> <span class="p">...</span><span class="nx">laterArgs</span><span class="p">)</span>
+</pre></div>
+
+<p>js 中的 bind 也可实现上面的功能，但是 FPer 不太喜欢，因为绑定 this 上下文和偏函数应用很多时候并不同时需要这两个功能</p>
+<p>反转参数</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">reverseArgs</span> <span class="o">=</span> <span class="nx">fn</span> <span class="p">=&gt;</span> 
+    <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">fn</span><span class="p">(...</span><span class="nx">args</span><span class="p">.</span><span class="nx">reverse</span><span class="p">())</span>
+
+<span class="kd">let</span> <span class="nx">cache</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="kd">let</span> <span class="nx">cacheResult</span> <span class="o">=</span> <span class="nx">reverseArgs</span><span class="p">(</span>
+    <span class="nx">partial</span><span class="p">(</span><span class="nx">reverseArgs</span><span class="p">(</span> <span class="nx">ajax</span> <span class="p">),</span> <span class="kd">function</span> <span class="nx">onResult</span><span class="p">(</span><span class="nx">obj</span><span class="p">){</span>
+        <span class="nx">cache</span><span class="p">[</span><span class="nx">obj</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">obj</span>
+    <span class="p">})</span>
+<span class="p">)</span>
+
+<span class="c1">// later:</span>
+<span class="nx">cacheResult</span><span class="p">(</span><span class="s2">&quot;http://some.api/person&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">user</span><span class="o">:</span> <span class="nx">CURRENT_USER_ID</span> <span class="p">})</span>
+</pre></div>
+
+<p>某些场景下，你只需要反转最右边的参数，因此可以编写一个基于反转参数的函数</p>
+<div class="codehilite"><pre><span></span><span class="kd">function</span> <span class="nx">partialRight</span><span class="p">(</span><span class="nx">fn</span><span class="p">,...</span><span class="nx">presetArgs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">reverseArgs</span><span class="p">(</span>
+        <span class="nx">partial</span><span class="p">(</span><span class="nx">reverseArgs</span><span class="p">(</span><span class="nx">fn</span><span class="p">),</span> <span class="p">...</span><span class="nx">presetArgs</span><span class="p">.</span><span class="nx">reverse</span><span class="p">())</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">cacheResult</span> <span class="o">=</span> <span class="nx">partialRight</span><span class="p">(</span> <span class="nx">ajax</span><span class="p">,</span> <span class="kd">function</span> <span class="nx">onResult</span><span class="p">(</span><span class="nx">obj</span><span class="p">){</span>
+    <span class="nx">cache</span><span class="p">[</span><span class="nx">obj</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">obj</span>
+<span class="p">})</span>
+
+<span class="c1">// later:</span>
+<span class="nx">cacheResult</span><span class="p">(</span> <span class="s2">&quot;http://some.api/person&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">user</span><span class="o">:</span> <span class="nx">CURRENT_USER_ID</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+
+<p>当然，可以用更直接的技巧</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">partialRight</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,...</span><span class="nx">presetArgs</span><span class="p">)</span> <span class="p">=&gt;</span> 
+    <span class="p">(...</span><span class="nx">laterArgs</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">fn</span><span class="p">(</span> <span class="p">...</span><span class="nx">laterArgs</span><span class="p">,</span> <span class="p">...</span><span class="nx">presetArgs</span> <span class="p">)</span>
+</pre></div>
+
+<h2 id="_4">柯里化<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>柯里化和偏函数很像，只不过柯里化每次都只接收一个参数，然后将参数传递给下一次调用，考虑如下代码</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">curry</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">=&gt;</span> 
+    <span class="p">(</span><span class="nx">nextCurry</span> <span class="o">=</span> <span class="nx">prevParam</span> <span class="p">=&gt;</span> 
+        <span class="nx">nextParam</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">prevParam</span><span class="p">,</span> <span class="nx">nextParam</span><span class="p">]</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">len</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">fn</span><span class="p">(...</span><span class="nx">params</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">nextCurry</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span>
+            <span class="p">}</span>
+    <span class="p">})([])</span>
+</pre></div>
+
+<p>上面的 len 不是必须要传递的参数，但是当你要 curry 的函数是不定参数的函数，则需要手动传入一个期望长度</p>
+<h3 id="_5">为什么使用柯里化和偏函数？<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>提高可读性</p>
+</li>
+<li>
+<p>拆分会扰乱可读性的其他参数信息</p>
+</li>
+</ul>
+<h3 id="_6">更宽松的柯里化<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>事实上 js 内部实现的柯里化都是这样，上面我们实现的柯里化可以理解为「strict」</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">looseCurry</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">=&gt;</span> 
+    <span class="p">(</span><span class="nx">nextCurried</span> <span class="o">=</span> <span class="nx">prevArgs</span> <span class="p">=&gt;</span> 
+        <span class="p">(...</span><span class="nx">nextArgs</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">args</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">prevArgs</span><span class="p">,</span> <span class="p">...</span><span class="nx">nextArgs</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">len</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">fn</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">nextCurried</span><span class="p">(</span><span class="nx">args</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">)([])</span>
+</pre></div>
+
+<h3 id="_7">取消柯里化<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">unCurry</span> <span class="o">=</span> <span class="nx">fn</span> <span class="p">=&gt;</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">ret</span> <span class="o">=</span> <span class="nx">fn</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">arg</span> <span class="k">of</span> <span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nx">ret</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">ret</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>需要注意的是，当你没有向取消柯里化中传入应有数量的参数，返回的仍然是一个偏函数</p>
+<h3 id="_8">高级实现<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>上面的柯里化和偏函数都只能按照参数的顺序，开发者不可能每次都 reverse 参数</p>
+<p>考虑下面的代码</p>
+<p>它使得参数的位置没那么重要</p>
+<div class="codehilite"><pre><span></span><span class="kd">let</span> <span class="nx">partialProps</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">presetPropsObj</span><span class="p">)</span> <span class="p">=&gt;</span> 
+    <span class="nx">propsObj</span> <span class="p">=&gt;</span> 
+        <span class="nx">fn</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">presetPropsObj</span><span class="p">,</span> <span class="nx">propsObj</span><span class="p">))</span>
+
+
+<span class="kd">let</span> <span class="nx">curryProps</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">=&gt;</span>
+    <span class="p">(</span><span class="nx">nextCurried</span> <span class="o">=</span> <span class="nx">nowObjProps</span> <span class="p">=&gt;</span> 
+        <span class="p">(</span><span class="nx">nextObjProps</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">=&gt;</span>
+            <span class="p">{</span>
+                <span class="kd">let</span> <span class="nx">props</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">nowObjProps</span><span class="p">,</span> <span class="nx">nextObjProps</span><span class="p">)</span>
+                <span class="k">if</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">props</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">len</span><span class="p">){</span>
+                    <span class="k">return</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">nextCurried</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> 
+                <span class="p">}</span>   
+            <span class="p">}</span>
+    <span class="p">)({})</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+  <h2 id="__comments">评论</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://chancezyw.github.io/shuyan/javascript/fp/manage-function-inputs/";
+      this.page.identifier =
+        "javascript/fp/manage-function-inputs/";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//chancezyw.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../nature-function/" title="Nature Function" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Nature Function
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../introduction/" title="NodeJs" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                NodeJs
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 - 2020 chanceZyw
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.8e03edeb.js"></script>
+      
+        
+        
+          
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js"></script>
+      
+        <script src="../../../_static/js/extra.js"></script>
+      
+        <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
