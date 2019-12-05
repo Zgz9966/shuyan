@@ -31,6 +31,8 @@ nav:
       - Manage Function Inputs: javascript/fp/manage-function-inputs.md
     - NodeJs: javascript/introduction.md
     - Addition Concept: javascript/introduction.md
+  - Js Ecosystem:
+    - Getting Started: javascript-ecosystem/introduction.md
 
 # Theme
 theme:
