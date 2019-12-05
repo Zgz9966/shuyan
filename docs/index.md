@@ -3,7 +3,7 @@
 [![Requirements Status](https://requires.io/github/chanceZyw/shuyan/requirements.svg?branch=master)](https://requires.io/github/chanceZyw/shuyan/requirements/?branch=master)
 [![Slack](https://img.shields.io/badge/slack-join%20chat-brightgreen.svg)](https://app.slack.com/client/TR0U3PTFB/apps?cdn_fallback=1)
 
-![](_static/imgs/introduction.jpg)
+![](_static/images/introduction.jpg)
 
 欢迎来到 **shuyan**。
 
