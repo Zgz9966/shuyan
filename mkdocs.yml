@@ -16,7 +16,7 @@ copyright: 'Copyright &copy; 2019 - 2020 chanceZyw'
 nav:
   - Introduction:
     - Getting Started: index.md 
-    - Study Thought: introduction/study-thought.md
+    - Study&Thought: introduction/study-thought.md
     - Learning Resources: introduction/resources.md
     - Markdown Norm: introduction/markdown-norm.md
   - JavaScript:
