@@ -1,5 +1,7 @@
 # shuyan
 
+![](https://badgen.net/badge/release/v1.0.0/:color?icon=github)
+![](https://badgen.net/badge/OvO/welcome!/:color?icon=github)
 [![Requirements Status](https://requires.io/github/chanceZyw/shuyan/requirements.svg?branch=master)](https://requires.io/github/chanceZyw/shuyan/requirements/?branch=master)
 [![Slack](https://img.shields.io/badge/slack-join%20chat-brightgreen.svg)](https://app.slack.com/client/TR0U3PTFB/apps?cdn_fallback=1)
 

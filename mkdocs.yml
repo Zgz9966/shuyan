@@ -40,7 +40,7 @@ theme:
   name: 'material'
   language: 'zh'
   palette:
-    primary: 'Red'
+    primary: 'white'
     accent: 'deep orange'
   logo:
     icon: 'polymer'
