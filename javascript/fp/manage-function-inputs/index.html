@@ -247,6 +247,19 @@
   
 
       
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../skills/introduction/" class="md-tabs__link">
+          Skills
+        </a>
+      
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -602,6 +615,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#point-style" class="md-nav__link">
+    Point Style
+  </a>
+  
+</li>
+      
       
       
       
@@ -616,6 +636,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../composing-functions/" title="Composing Function" class="md-nav__link">
+      Composing Function
+    </a>
   </li>
 
         
@@ -725,6 +757,78 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Skills
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Skills
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../skills/introduction/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      Git
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        Git
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../skills/git/git-cz/" title="git-cz" class="md-nav__link">
+      git-cz
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -802,6 +906,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#point-style" class="md-nav__link">
+    Point Style
+  </a>
   
 </li>
       
@@ -1031,6 +1142,27 @@
             <span class="p">}</span>
     <span class="p">)({})</span>
 </pre></div>
+
+<p>可是有的时候我们没法更改传入的函数的参数，这使得我们不能轻易的使用解构。</p>
+<p>幸好 js 有一个内置方法叫做 <code>toString()</code> 可以让我们拿到函数的参数列表，再通过类似前面 spreadArgs 的转换，实现一个函数装饰器</p>
+<h2 id="point-style">Point Style<a class="headerlink" href="#point-style" title="Permanent link">&para;</a></h2>
+<p>当我们遇见某些函数，他们接收参数，并将参数原封不动的 <strong>转发</strong> 给另一个函数，我们可以把它砍掉</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">addThree</span> <span class="o">=</span> <span class="nx">v</span> <span class="p">=&gt;</span> <span class="nx">v</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">v</span> <span class="p">=&gt;</span> <span class="nx">addThree</span><span class="p">(</span><span class="nx">v</span><span class="p">))</span>
+
+<span class="c1">// 优化</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">].</span><span class="nx">map</span><span class="p">(</span><span class="nx">addThree</span><span class="p">)</span>
+</pre></div>
+
+<p>如果是之前 <code>parseInt()</code> 的那个例子，则可以通过 <code>unary</code> 方法实现这一编程风格</p>
+<p>又比如你有两个完全相反的判断</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">isShortEnough</span> <span class="o">=</span> <span class="nx">msg</span> <span class="p">=&gt;</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">5</span>
+<span class="kd">let</span> <span class="nx">isLongEnough</span> <span class="o">=</span> <span class="nx">msg</span> <span class="p">=&gt;</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">5</span>
+
+<span class="c1">// </span>
+<span class="kd">let</span> <span class="nx">not</span> <span class="o">=</span> <span class="nx">fn</span> <span class="p">=&gt;</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="o">!</span><span class="nx">fn</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">isLongEnough</span> <span class="o">=</span> <span class="nx">not</span><span class="p">(</span><span class="nx">isShortEnough</span><span class="p">)</span>  
+</pre></div>
                 
                   
                 
@@ -1082,13 +1214,13 @@
           </a>
         
         
-          <a href="../../introduction/" title="NodeJs" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../composing-functions/" title="Composing Function" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   下一页
                 </span>
-                NodeJs
+                Composing Function
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
