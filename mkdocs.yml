@@ -34,6 +34,12 @@ nav:
     - Addition Concept: javascript/introduction.md
   - Js Ecosystem:
     - Getting Started: javascript-ecosystem/introduction.md
+  - Algorithm:
+    - Getting Started: algorithm/introduction.md
+  - Skills:
+    - Getting Started: skills/introduction.md
+    - Git:
+      - git-cz: skills/git/git-cz.md
 
 # Theme
 theme:

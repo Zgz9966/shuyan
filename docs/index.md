@@ -1,5 +1,7 @@
 # shuyan
 
+> 那些将要去的地方，都是素未谋面的故乡。
+
 ![](https://badgen.net/badge/release/v1.0.0/:color?icon=github)
 ![](https://badgen.net/badge/OvO/welcome!/:color?icon=github)
 [![Requirements Status](https://requires.io/github/chanceZyw/shuyan/requirements.svg?branch=master)](https://requires.io/github/chanceZyw/shuyan/requirements/?branch=master)
