@@ -242,3 +242,32 @@ let curryProps = (fn, len = 1) =>
             }
     )({})
 ```
+
+可是有的时候我们没法更改传入的函数的参数，这使得我们不能轻易的使用解构。
+
+幸好 js 有一个内置方法叫做 `toString()` 可以让我们拿到函数的参数列表，再通过类似前面 spreadArgs 的转换，实现一个函数装饰器
+
+## Point Style
+
+当我们遇见某些函数，他们接收参数，并将参数原封不动的 **转发** 给另一个函数，我们可以把它砍掉
+
+```js
+let addThree = v => v + 3
+[1, 2, 3, 4, 5].map(v => addThree(v))
+
+// 优化
+[1, 2, 3, 4, 5].map(addThree)
+```
+
+如果是之前 `parseInt()` 的那个例子，则可以通过 `unary` 方法实现这一编程风格
+
+又比如你有两个完全相反的判断
+
+```js
+let isShortEnough = msg => msg.length <= 5
+let isLongEnough = msg => msg.length > 5
+
+// 
+let not = fn => (...args) => !fn(...args)
+let isLongEnough = not(isShortEnough)  
+```
