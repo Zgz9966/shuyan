@@ -95,6 +95,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -544,10 +548,54 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Composing Function
+      </label>
     
     <a href="./" title="Composing Function" class="md-nav__link md-nav__link--active">
       Composing Function
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#function-outputs" class="md-nav__link">
+    function outputs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    常规函数组合
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -737,6 +785,50 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#function-outputs" class="md-nav__link">
+    function outputs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    常规函数组合
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -745,9 +837,83 @@
                   <a href="https://github.com/chancezyw/shuyan/edit/master/docs/javascript/fp/composing-functions.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Composing Function</h1>
-                
-                
+                <h1 id="_1">函数组合<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><img alt="" src="../images/Lego.jpg" /></p>
+<p>函数的组合就像拼 Lego 一样，你可以从现成的积木库中取出小方块和长条去组成程序中数据需要的管道样子。</p>
+<h2 id="function-outputs">function outputs<a class="headerlink" href="#function-outputs" title="Permanent link">&para;</a></h2>
+<p>在函数组合中，很容易发生这种情况，一个函数的输出作为下一个函数的输入传递，直到拿到最终的输出</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">toUpper</span> <span class="o">=</span> <span class="nx">msg</span> <span class="p">=&gt;</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span>
+
+<span class="kd">let</span> <span class="nx">welcome</span> <span class="o">=</span> <span class="nx">msg</span> <span class="p">=&gt;</span> <span class="nx">msg</span> <span class="o">+</span> <span class="s1">&#39;GOOD NIGHT&#39;</span>
+
+<span class="kd">let</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">toUpper</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">welcomeUser</span> <span class="o">=</span> <span class="nx">welcome</span><span class="p">(</span><span class="nx">username</span><span class="p">)</span>
+
+
+<span class="c1">// 改进</span>
+
+<span class="kd">let</span> <span class="nx">welcomeWord</span> <span class="o">=</span> <span class="nx">msg</span> <span class="p">=&gt;</span> <span class="nx">welcome</span><span class="p">(</span><span class="nx">toUpper</span><span class="p">(</span><span class="nx">msg</span><span class="p">))</span>
+
+<span class="kd">let</span> <span class="nx">welcomeUser</span> <span class="o">=</span> <span class="nx">welcomeWord</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">)</span>
+</pre></div>
+
+<p>考虑一个通用的组合函数</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">compose2</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn2</span><span class="p">,</span><span class="nx">fn1</span><span class="p">)</span> <span class="p">=&gt;</span>
+    <span class="nx">origValue</span> <span class="p">=&gt;</span> <span class="nx">fn2</span><span class="p">(</span><span class="nx">fn1</span><span class="p">(</span><span class="nx">origValue</span><span class="p">));</span>
+</pre></div>
+
+<p>注意函数的运行顺序从右向左，左边的函数在最外层最后执行。</p>
+<p>这是大多数 FP 的库的约定俗成的规定。</p>
+<p>需要注意的是，函数的组合需要注意类型安全，上面只是一个做作的例子。</p>
+<p>我们可以把 2 * 2 的 Lego 放在 1 * 4 的 Lego 上面，也可以吧 1 * 4 的 Lego 放在 2 * 2 的 Lego 上面。</p>
+<h2 id="_2">常规函数组合<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>我们如果可以轻易的组合两个函数，那么同样的，我们也可以组合多个函数</p>
+<p><code>finalValue &lt;-- func1 &lt;-- func2 &lt;-- ... &lt;-- funcN &lt;-- origValue</code></p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">compose</span> <span class="o">=</span> <span class="p">(...</span><span class="nx">fns</span><span class="p">)</span> <span class="p">=&gt;</span>
+    <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">list</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">fns</span><span class="p">]</span>
+        <span class="k">while</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">res</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">pop</span><span class="p">()(</span><span class="nx">res</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">res</span>
+    <span class="p">}</span>
+</pre></div>
+
+<blockquote>
+<p>这里之所以使用 list copy 一份函数数组是因为，如果不拷贝的话，返回的组合函数化只能使用一次。 pop 方法会修改原数组，使得 fns 长度减小</p>
+</blockquote>
+<p>然后我们可以对之前的函数进行组合。并且可以使用系列第三篇文章提到的 partialRight 来预设要组合的函数。</p>
+<p>当然，也可以使用 curry 和 reverse 来从左到右的依次组合。</p>
+<p>这和数组的 <code>reduce()</code> 方法很像，因此我们还有别的实现 compose 的方式</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">compose</span> <span class="o">=</span> <span class="p">(...</span><span class="nx">fns</span><span class="p">)</span> <span class="p">=&gt;</span>
+    <span class="nx">res</span> <span class="p">=&gt;</span> <span class="p">[...</span><span class="nx">fns</span><span class="p">].</span><span class="nx">reverse</span><span class="p">().</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">result</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">result</span><span class="p">),</span> <span class="nx">res</span><span class="p">)</span>
+</pre></div>
+
+<p>这样实现的好处是更具备可读性，也是 FPer 喜欢的方式，他的性能也和使用 for 循环类似。</p>
+<p>但是这样实现每次迭代函数只能接收一个参数。</p>
+<p>当然，我们也可以使用一个惰性函数封装</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">compose</span> <span class="o">=</span> <span class="p">(...</span><span class="nx">fns</span><span class="p">)</span> <span class="p">=&gt;</span>
+    <span class="nx">fns</span><span class="p">.</span><span class="nx">reverse</span><span class="p">().</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">fn1</span><span class="p">,</span><span class="nx">fn2</span><span class="p">)</span> <span class="p">=&gt;</span>
+        <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">fn2</span><span class="p">(</span><span class="nx">fn1</span><span class="p">(...</span><span class="nx">args</span><span class="p">)))</span>
+</pre></div>
+
+<p>在每次 reduce 中，我们不再计算函数的返回值，而是将函数作为输入传递给下一次迭代的函数。这样我们可以尽可能多的传递参数，而不用受到局限。</p>
+<p>在这样实现 compose 的技巧当中，我们运用了 <strong>惰性计算</strong> 的方式。</p>
+<p>这样实现在每次调用组合函数时，将不会调用 reduce 循环</p>
+<p>甚至，我们还可以通过递归的方式去调用 compose2 方法</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">compose</span> <span class="o">=</span> <span class="p">(...</span><span class="nx">fns</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// pull off the last two arguments</span>
+    <span class="kd">let</span> <span class="p">[</span> <span class="nx">fn1</span><span class="p">,</span> <span class="nx">fn2</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span> <span class="p">]</span> <span class="o">=</span> <span class="nx">fns</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+
+    <span class="kd">let</span> <span class="nx">composedFn</span> <span class="o">=</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">fn2</span><span class="p">(</span> <span class="nx">fn1</span><span class="p">(</span> <span class="p">...</span><span class="nx">args</span> <span class="p">)</span> <span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">rest</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nx">composedFn</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="nx">compose</span><span class="p">(</span> <span class="p">...</span><span class="nx">rest</span><span class="p">.</span><span class="nx">reverse</span><span class="p">(),</span> <span class="nx">composedFn</span> <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>递归的好处在于我们能从概念性上去去理解 compose</p>
                 
                   
                 
