@@ -10,17 +10,13 @@
 
 ```js
 let toUpper = msg => msg.toUpperCase()
-
 let welcome = msg => msg + 'GOOD NIGHT'
-
 let username = toUpper('User')
 let welcomeUser = welcome(username)
 
 
 // 改进
-
 let welcomeWord = msg => welcome(toUpper(msg))
-
 let welcomeUser = welcomeWord('User')
 ```
 
@@ -56,7 +52,7 @@ let compose = (...fns) =>
     }
 ```
 
-> 这里之所以使用 list copy 一份函数数组是因为，如果不拷贝的话，返回的组合函数化只能使用一次。 pop 方法会修改原数组，使得 fns 长度减小
+> 这里之所以使用 list copy 一份函数数组是因为，如果不拷贝的话，返回的组合函数只能使用一次。 pop 方法会修改原数组，使得 fns 长度减小
 
 然后我们可以对之前的函数进行组合。并且可以使用系列第三篇文章提到的 partialRight 来预设要组合的函数。
 
@@ -103,4 +99,4 @@ let compose = (...fns) => {
 }
 ```
 
-递归的好处在于我们能从概念性上去去理解 compose
+递归的好处在于我们能从概念上去理解 compose
