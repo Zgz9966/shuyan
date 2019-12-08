@@ -100,3 +100,104 @@ let compose = (...fns) => {
 ```
 
 递归的好处在于我们能从概念上去理解 compose
+
+## pipe
+
+pipe 与 compose 相同，只不过 pipe 是从左往右
+
+```js
+let pipe = reverseArgs(compose)
+```
+
+你可能会困惑，我们给出详细实现。
+
+```js
+let pipe = (...fns) => 
+    result => {
+        let list = [...fns]
+
+        while (list.length > 0) {
+            // take the first function from the list
+            // and execute it
+            result = list.shift()( result );
+        }
+
+        return result;
+    };
+```
+
+在某些需要 reverse 右边参数的场景，使用 pipe 会更有效率
+
+## Abstraction
+
+抽象是一个重要的能力，他让我们的一些代码只需要写一遍。
+
+思考
+
+```js
+let saveComment = txt => {
+    if (txt != "") comments[comments.length] = txt;
+}
+
+let trackEvent = evt => {
+    if (evt.name !== undefined) {
+        events[evt.name] = evt;
+    }
+}
+```
+
+我们可以很轻松的发现，上面代码的共性就是存储一个值
+
+```js
+function storeData(store, location, value) {
+    store[location] = value;
+}
+
+function saveComment(txt) {
+    if (txt != "") {
+        storeData( comments, comments.length, txt );
+    }
+}
+
+function trackEvent(evt) {
+    if (evt.name !== undefined) {
+        storeData( events, evt.name, evt );
+    }
+}
+```
+
+上面体现了抽象的一个原则，那就是不要重复。
+
+但是注意抽象不要过头。
+
+我们可以隐藏一些细节，就像黑盒子那样
+
+但是被隐藏的细节应该是相对的，比如我们有一个相互依赖的功能 x 和 y
+
+当我们专注 x 的时候 y 是无关紧要的 相反，我们专注 y 的时候 x 是无关紧要的。
+
+**我们抽象的目的不是隐藏细节，而是调整聚焦**。
+
+请时刻记住，函数式编程的本质目的是写出更多可读性良好，可维护的代码。
+
+为了分离两个概念，我们会插入一个语义级的分界，在大多数情况下，这个边界就是函数的名称。我们调用时，只在意名称和他的输出。
+
+我们把 _怎样_ 和 _什么_ 分离开来
+
+命令式编程风格说明 _怎样_
+
+而声明式风格注重 _什么_ 也就是输出，声明式关心结果，将如何实现交给别人。
+
+声明式代码实现了从 how 到 what 的一个抽象
+
+我们应该在声明式和命令式之间找到一个平衡。
+
+声明式简单的将 做什么 和 如何做 分开
+
+## compose VS abstract
+
+compose 也是 声明式 的抽象
+
+总而言之，compose 是一项非常有用的技能来将我们命令式的代码转换为可读性更好的声明式的代码。
+
+在 FP 中 compose是极其重要的一种方式，它可能是函数间除了副作用传递数据的唯一方法。
