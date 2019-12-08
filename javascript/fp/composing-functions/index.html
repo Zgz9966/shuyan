@@ -583,6 +583,27 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#pipe" class="md-nav__link">
+    pipe
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstraction" class="md-nav__link">
+    Abstraction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compose-vs-abstract" class="md-nav__link">
+    compose VS abstract
+  </a>
+  
+</li>
+      
       
       
       
@@ -597,6 +618,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../side-effect/" title="Side Effects" class="md-nav__link">
+      Side Effects
+    </a>
   </li>
 
         
@@ -812,6 +845,27 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#pipe" class="md-nav__link">
+    pipe
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstraction" class="md-nav__link">
+    Abstraction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compose-vs-abstract" class="md-nav__link">
+    compose VS abstract
+  </a>
+  
+</li>
+      
       
       
       
@@ -843,17 +897,13 @@
 <h2 id="function-outputs">function outputs<a class="headerlink" href="#function-outputs" title="Permanent link">&para;</a></h2>
 <p>在函数组合中，很容易发生这种情况，一个函数的输出作为下一个函数的输入传递，直到拿到最终的输出</p>
 <div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">toUpper</span> <span class="o">=</span> <span class="nx">msg</span> <span class="p">=&gt;</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span>
-
 <span class="kd">let</span> <span class="nx">welcome</span> <span class="o">=</span> <span class="nx">msg</span> <span class="p">=&gt;</span> <span class="nx">msg</span> <span class="o">+</span> <span class="s1">&#39;GOOD NIGHT&#39;</span>
-
 <span class="kd">let</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">toUpper</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">)</span>
 <span class="kd">let</span> <span class="nx">welcomeUser</span> <span class="o">=</span> <span class="nx">welcome</span><span class="p">(</span><span class="nx">username</span><span class="p">)</span>
 
 
 <span class="c1">// 改进</span>
-
 <span class="kd">let</span> <span class="nx">welcomeWord</span> <span class="o">=</span> <span class="nx">msg</span> <span class="p">=&gt;</span> <span class="nx">welcome</span><span class="p">(</span><span class="nx">toUpper</span><span class="p">(</span><span class="nx">msg</span><span class="p">))</span>
-
 <span class="kd">let</span> <span class="nx">welcomeUser</span> <span class="o">=</span> <span class="nx">welcomeWord</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -880,7 +930,7 @@
 </pre></div>
 
 <blockquote>
-<p>这里之所以使用 list copy 一份函数数组是因为，如果不拷贝的话，返回的组合函数化只能使用一次。 pop 方法会修改原数组，使得 fns 长度减小</p>
+<p>这里之所以使用 list copy 一份函数数组是因为，如果不拷贝的话，返回的组合函数只能使用一次。 pop 方法会修改原数组，使得 fns 长度减小</p>
 </blockquote>
 <p>然后我们可以对之前的函数进行组合。并且可以使用系列第三篇文章提到的 partialRight 来预设要组合的函数。</p>
 <p>当然，也可以使用 curry 和 reverse 来从左到右的依次组合。</p>
@@ -913,7 +963,78 @@
 <span class="p">}</span>
 </pre></div>
 
-<p>递归的好处在于我们能从概念性上去去理解 compose</p>
+<p>递归的好处在于我们能从概念上去理解 compose</p>
+<h2 id="pipe">pipe<a class="headerlink" href="#pipe" title="Permanent link">&para;</a></h2>
+<p>pipe 与 compose 相同，只不过 pipe 是从左往右</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">pipe</span> <span class="o">=</span> <span class="nx">reverseArgs</span><span class="p">(</span><span class="nx">compose</span><span class="p">)</span>
+</pre></div>
+
+<p>你可能会困惑，我们给出详细实现。</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">pipe</span> <span class="o">=</span> <span class="p">(...</span><span class="nx">fns</span><span class="p">)</span> <span class="p">=&gt;</span> 
+    <span class="nx">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">list</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">fns</span><span class="p">]</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// take the first function from the list</span>
+            <span class="c1">// and execute it</span>
+            <span class="nx">result</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">shift</span><span class="p">()(</span> <span class="nx">result</span> <span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="p">};</span>
+</pre></div>
+
+<p>在某些需要 reverse 右边参数的场景，使用 pipe 会更有效率</p>
+<h2 id="abstraction">Abstraction<a class="headerlink" href="#abstraction" title="Permanent link">&para;</a></h2>
+<p>抽象是一个重要的能力，他让我们的一些代码只需要写一遍。</p>
+<p>思考</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">saveComment</span> <span class="o">=</span> <span class="nx">txt</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">txt</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="nx">comments</span><span class="p">[</span><span class="nx">comments</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">trackEvent</span> <span class="o">=</span> <span class="nx">evt</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">name</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">events</span><span class="p">[</span><span class="nx">evt</span><span class="p">.</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">evt</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>我们可以很轻松的发现，上面代码的共性就是存储一个值</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">storeData</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">location</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">store</span><span class="p">[</span><span class="nx">location</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">saveComment</span><span class="p">(</span><span class="nx">txt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">txt</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">storeData</span><span class="p">(</span> <span class="nx">comments</span><span class="p">,</span> <span class="nx">comments</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">txt</span> <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">trackEvent</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">name</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">storeData</span><span class="p">(</span> <span class="nx">events</span><span class="p">,</span> <span class="nx">evt</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">evt</span> <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>上面体现了抽象的一个原则，那就是不要重复。</p>
+<p>但是注意抽象不要过头。</p>
+<p>我们可以隐藏一些细节，就像黑盒子那样</p>
+<p>但是被隐藏的细节应该是相对的，比如我们有一个相互依赖的功能 x 和 y</p>
+<p>当我们专注 x 的时候 y 是无关紧要的 相反，我们专注 y 的时候 x 是无关紧要的。</p>
+<p><strong>我们抽象的目的不是隐藏细节，而是调整聚焦</strong>。</p>
+<p>请时刻记住，函数式编程的本质目的是写出更多可读性良好，可维护的代码。</p>
+<p>为了分离两个概念，我们会插入一个语义级的分界，在大多数情况下，这个边界就是函数的名称。我们调用时，只在意名称和他的输出。</p>
+<p>我们把 <em>怎样</em> 和 <em>什么</em> 分离开来</p>
+<p>命令式编程风格说明 <em>怎样</em></p>
+<p>而声明式风格注重 <em>什么</em> 也就是输出，声明式关心结果，将如何实现交给别人。</p>
+<p>声明式代码实现了从 how 到 what 的一个抽象</p>
+<p>我们应该在声明式和命令式之间找到一个平衡。</p>
+<p>声明式简单的将 做什么 和 如何做 分开</p>
+<h2 id="compose-vs-abstract">compose VS abstract<a class="headerlink" href="#compose-vs-abstract" title="Permanent link">&para;</a></h2>
+<p>compose 也是 声明式 的抽象</p>
+<p>总而言之，compose 是一项非常有用的技能来将我们命令式的代码转换为可读性更好的声明式的代码。</p>
+<p>在 FP 中 compose是极其重要的一种方式，它可能是函数间除了副作用传递数据的唯一方法。</p>
                 
                   
                 
@@ -965,13 +1086,13 @@
           </a>
         
         
-          <a href="../../introduction/" title="NodeJs" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../side-effect/" title="Side Effects" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   下一页
                 </span>
-                NodeJs
+                Side Effects
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
