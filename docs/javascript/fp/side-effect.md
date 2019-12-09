@@ -347,4 +347,92 @@ function rememberNumbers(...nums) {
 
 判断一个函数是否纯净的第三种方式，是 Referential transparency。如果将一个函数和他的输出对换，行为上没有任何变化，那么就是纯函数。
 
+也就是说，在一个程序当中，我们用一个 val 代替了一个函数调用，在执行上我们看不出任何区别，那么这个函数就是纯函数。
 
+如果一个函数存在副作用，但是在程序的任何地方都没有被观察到或者被依赖，那么他还具备引用透明性吗？
+
+```js
+function calculateAverage(nums) {
+    sum = 0;
+    for (let num of nums) {
+        sum += num;
+    }
+    return sum / nums.length;
+}
+
+var sum;
+var numbers = [1,2,4,7,11,16,22];
+
+var avg = calculateAverage( numbers );
+```
+
+不得不说他和纯函数几乎没有区别，但是如何看待他取决于你自己
+
+### Performance Effects
+
+观察这个函数
+
+```js
+var cache = [];
+
+function specialNumber(n) {
+    // if we've already calculated this special number,
+    // skip the work and just return it from the cache
+    if (cache[n] !== undefined) {
+        return cache[n];
+    }
+
+    var x = 1, y = 1;
+
+    for (let i = 1; i <= n; i++) {
+        x += i % 2;
+        y += i % 3;
+    }
+
+    cache[n] = (x * y) / (n + 1);
+
+    return cache[n];
+}
+
+specialNumber( 6 );             // 4
+specialNumber( 42 );            // 22
+specialNumber( 1E6 );           // 500001
+specialNumber( 987654321 );     // 493827162
+```
+
+我们通过一个缓存来优化多次调用这个算法的性能，但是这看起来很蠢，你可能认为他是纯函数，但是我不这么认为。
+
+```js
+var specialNumber = (function memoization(){
+    var cache = [];
+
+    return function specialNumber(n){
+        // if we've already calculated this special number,
+        // skip the work and just return it from the cache
+        if (cache[n] !== undefined) {
+            return cache[n];
+        }
+
+        var x = 1, y = 1;
+
+        for (let i = 1; i <= n; i++) {
+            x += i % 2;
+            y += i % 3;
+        }
+
+        cache[n] = (x * y) / (n + 1);
+
+        return cache[n];
+    };
+})();
+```
+
+我们通过 IIFE 来 **确保** 函数的其他部分不能访问到 cache，而不仅仅是 **不允许**
+
+## Mentally Transparent
+
+虽然有时将常数和函数调用替换对函数的执行没有影响，但是我们不应该这么做。
+
+不仅仅是因为数据可能是变化的，还为了更好地可读性。
+
+读者会不断地心算一个永远不会变的结果，但是纯函数能够减少这样的花销。
