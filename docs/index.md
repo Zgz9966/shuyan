@@ -40,6 +40,8 @@ blog 目前采用 [mkdocs](https://github.com/mkdocs/mkdocs) 部署在 [https://
 
 > `mkdocs gh-deploy`可以将其直接提交到 gh-pages 分支
 
+> 如何安装 mkdocs 待整理
+
 ## How to practice？
 
 首先，可以通过浏览网上资料来学习一些基本的语法。
