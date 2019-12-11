@@ -42,7 +42,7 @@
     
     
       
-        <title>Value immutable - chanceZyw</title>
+        <title>Value Immutable - chanceZyw</title>
       
     
     
@@ -121,7 +121,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Value immutable
+                Value Immutable
               
             </span>
           
@@ -189,7 +189,9 @@
       
         
 
-<nav class="md-tabs" data-md-component="tabs">
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
@@ -211,7 +213,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../introduction/" class="md-tabs__link">
+        <a href="../../introduction/" class="md-tabs__link md-tabs__link--active">
           JavaScript
         </a>
       
@@ -377,10 +379,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       JavaScript
@@ -480,10 +484,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5" checked>
     
     <label class="md-nav__link" for="nav-2-5">
       FP
@@ -552,6 +558,120 @@
     <a href="../side-effect/" title="Side Effects" class="md-nav__link">
       Side Effects
     </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Value Immutable
+      </label>
+    
+    <a href="./" title="Value Immutable" class="md-nav__link md-nav__link--active">
+      Value Immutable
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#immutable" class="md-nav__link">
+    原始数据类型的 immutable
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#value-to-value" class="md-nav__link">
+    Value to Value
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    非原始数据类型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reassignment" class="md-nav__link">
+    Reassignment
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intent" class="md-nav__link">
+    Intent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#freezing" class="md-nav__link">
+    Freezing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    性能
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#treatment" class="md-nav__link">
+    Treatment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" class="md-nav__link md-nav__link--active">
+            评论
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -765,6 +885,61 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    非原始数据类型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reassignment" class="md-nav__link">
+    Reassignment
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intent" class="md-nav__link">
+    Intent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#freezing" class="md-nav__link">
+    Freezing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    性能
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#treatment" class="md-nav__link">
+    Treatment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
       
       
       
@@ -790,7 +965,7 @@
                   <a href="https://github.com/chancezyw/shuyan/edit/master/docs/javascript/fp/value-immutable.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Value immutable</h1>
+                  <h1>Value Immutable</h1>
                 
                 <p>这一节和上节一样，都是为了减少副作用而努力。</p>
 <p>如果说编程角度的幂等让一个数值改变的操作变为一次，那么不可变数据结构就是将其变为 0 次。</p>
@@ -855,8 +1030,130 @@
     <span class="k">return</span> <span class="nx">newUserRecord</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nx">user</span> <span class="o">=</span> <span class="nx">updateLastLogin</span><span class="p">(</span> <span class="nx">user</span> <span class="p">);</span>
+<span class="nx">user</span> <span class="o">=</span> <span class="nx">updateLastLogin</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
 </pre></div>
+
+<h2 id="_1">非原始数据类型<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>非原始数据类型作为参数传递时会复制一个引用传递，而不是它本身的值。</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+
+<span class="nx">foo</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</pre></div>
+
+<p>显然，我们不能保证打印的值仍然为 1，这时我们要用到上一节的技巧</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+
+<span class="nx">foo</span><span class="p">([...</span><span class="nx">arr</span><span class="p">]);</span>         <span class="c1">// ha! a copy!</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>      <span class="c1">// 1</span>
+</pre></div>
+
+<h2 id="reassignment">Reassignment<a class="headerlink" href="#reassignment" title="Permanent link">&para;</a></h2>
+<p>如何定义常量？可能有各种各样不同的回答，但是最接近真相的一个回答就是。</p>
+<blockquote>
+<p>一个不能被再分配的变量</p>
+</blockquote>
+<p>这种挑剔的描述很重要。因为这说明了一个常数与他的值无关，不管常数保持什么值，都不能再为这个常数分配其他的值。</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 我们为 x 分配了一个不可以改变的原始值</span>
+
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// x: 3</span>
+
+<span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// 我们定义了一个不可以再分配的变量 x</span>
+
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// Error</span>
+
+<span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="nx">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// x: [4]</span>
+
+<span class="nx">x</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">// Error</span>
+</pre></div>
+
+<p>我想上面的例子清晰地阐述了「常数」和「常量」的区别。</p>
+<p>那么对于 FPer 来说，const 有什么作用呢</p>
+<h3 id="intent">Intent<a class="headerlink" href="#intent" title="Permanent link">&para;</a></h3>
+<p>const 可以明显的从语义上提示读者这个变量是不可以再分配的。</p>
+<p>但是 const 的缺点也很明显，首先，对于引用类型，依旧无法保证「突变」，其次，这和 immutable 数据发生冲突。</p>
+<div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">magicNums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="nx">magicNums</span> <span class="o">=</span> <span class="nx">magicNums</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span> <span class="c1">// error</span>
+</pre></div>
+
+<p>所以对于 FPer，我们只使用 const 声明一些简单的常量。</p>
+<p>如 <code>const PI = 3.141592653</code></p>
+<p>需要注意的是，我们关心的重点始终是值的「突变」，而不是变量的分配。</p>
+<h3 id="freezing">Freezing<a class="headerlink" href="#freezing" title="Permanent link">&para;</a></h3>
+<p>有一种简单的方式让对象、数组、函数变成一个 "immutable value"</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">freeze</span><span class="p">([</span><span class="mi">2</span><span class="p">]);</span>
+</pre></div>
+
+<p>freeze 遍历对象与数组的所有属性和索引，将它们变为已读和「不可被重新配置」，所以这些属性不能被「再分配」。</p>
+<p>同时，freeze 将对象标记成不可拓展，也就是无法添加新属性。</p>
+<p>但是要注意的是，freeze 不可变的层级只有一层。也就是「shadow immutable」。</p>
+<p>如果想要深度 immutable，那么需要递归遍历对象。</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">freeze</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]);</span>
+
+<span class="c1">// not allowed:</span>
+<span class="nx">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+
+<span class="c1">// oops, still allowed:</span>
+<span class="nx">x</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+</pre></div>
+
+<p>与 const 不同的是，const 让你误以为这个值不可变，而 freeze 才真正做到了这点。</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">freeze</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span>
+
+<span class="nx">foo</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>          <span class="c1">// 1</span>
+</pre></div>
+
+<h2 id="_2">性能<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>当我们每次都新创建一个值而不是「突变」一个存在的值，下一个要关注的点就是性能问题。</p>
+<p>是否可以考虑一种特殊的数组结构，存储每一次「增量修改」。</p>
+<p>仅记录与上一个版本的差异，而不是整个原始数据结构的重复。</p>
+<p><img alt="" src="../images/fig18.png" /></p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">specialArray</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">newState</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 在位置 4 上插入 2</span>
+
+<span class="nx">state</span> <span class="o">===</span> <span class="nx">newState</span><span class="p">;</span>                 <span class="c1">// false</span>
+
+<span class="nx">state</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="mi">2</span> <span class="p">);</span>                     <span class="c1">// 1</span>
+<span class="nx">state</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="mi">4</span> <span class="p">);</span>                     <span class="c1">// undefined</span>
+
+<span class="nx">newState</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="mi">2</span> <span class="p">);</span>                  <span class="c1">// 1</span>
+<span class="nx">newState</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="mi">4</span> <span class="p">);</span>                  <span class="c1">// 2</span>
+
+<span class="nx">newState</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span> <span class="p">);</span>             <span class="c1">// [1,1,2]</span>
+</pre></div>
+
+<p>specialArray 用 diff 的方式跟踪每个「突变」，且 state 和 newState 指向数值的不同版本。</p>
+<p><a href="https://immutable-js.github.io/immutable-js/">immutable.js</a> 提供了一个实现</p>
+<div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">Immutable</span><span class="p">.</span><span class="nx">List</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">newState</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+<span class="nx">state</span> <span class="o">===</span> <span class="nx">newState</span><span class="p">;</span>                 <span class="c1">// false</span>
+
+<span class="nx">state</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>                     <span class="c1">// 1</span>
+<span class="nx">state</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>                     <span class="c1">// undefined</span>
+
+<span class="nx">newState</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>                  <span class="c1">// 1</span>
+<span class="nx">newState</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>                  <span class="c1">// 2</span>
+
+<span class="nx">newState</span><span class="p">.</span><span class="nx">toArray</span><span class="p">().</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>   <span class="c1">// [1,1,2]</span>
+</pre></div>
+
+<p>immutable.js 采用了复杂的性能优化实现。自己实现太麻烦了~</p>
+<h2 id="treatment">Treatment<a class="headerlink" href="#treatment" title="Permanent link">&para;</a></h2>
+<p><strong>不管函数接收到一个值是可变的还是不可变的，我们都把它当做 immutable 对待。</strong></p>
+<h2 id="_3">总结<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>immutable 并不意味着一个变量是不变的。immutable 在状态变更时创建和跟踪一个新的值，而不是对现有的值「突变」。</p>
+<p>const 其实与 immutable 无关，而 Object.freeze() 提供了一个很好地方法来保证 immutable。</p>
+<p>如果遇见性能瓶颈，可以使用第三方库的不可变数据结构。</p>
                 
                   
                 
@@ -889,6 +1186,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../side-effect/" title="Side Effects" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Side Effects
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../introduction/" title="NodeJs" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                NodeJs
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
