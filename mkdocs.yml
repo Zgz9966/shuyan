@@ -32,6 +32,7 @@ nav:
       - Manage Function Inputs: javascript/fp/manage-function-inputs.md
       - Composing Function: javascript/fp/composing-functions.md
       - Side Effects: javascript/fp/side-effect.md
+      - Value Immutable: javascript/fp/value-immutable.md
     - NodeJs: javascript/introduction.md
     - Addition Concept: javascript/introduction.md
   - Js Ecosystem:
